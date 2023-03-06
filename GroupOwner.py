@@ -1,4 +1,3 @@
-# import Group
 import group
 import group_member
 

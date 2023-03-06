@@ -1,6 +1,6 @@
 import menu
 import review
-Class restaurant:
+class restaurant:
     def __init__(self,name:str,location:str,distance:int,env:float,taste:float, varieties:float,menu:menu,reviews:list):
         self.name = name 
         self.location = location

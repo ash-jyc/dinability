@@ -1,5 +1,5 @@
 import group
-import group_member
+from groupMember import group_member
 
 class GroupOwner(group_member):
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--navigation-->
+        <div class="topnav">
+            <a href="./index.html">Home</a>
+            <a href="./restaurants.html">Restaurants</a>
+            <a href="./groups.html">Groups</a>
+            <a href="./about.html">About</a>
+            <a class="active" href="#profile">Profile</a>
+            <link rel="stylesheet" href="styles.css">
+            <!--USE LATER, PUT IN STATIC FOLDER <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"-->
+        </div>
+    </head>
+    <body>
+        <!--login-->
+        <div class="container">
+            <!--form for login-->
+            <form>
+                <!--cool uname box-->
+                <div>
+                    <link href="./input-box.css" rel="stylesheet" />
+                    <div>
+                        <label for="username"><b>Username</b></label>
+                        <input type="text" name="username" placeholder="name" class="input input-box-textinput" required/>
+                    </div>
+                    <div>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" name="email" placeholder="email" class="input input-box-textinput" required/>
+                    </div>
+                    <div>
+                        <label for="password"><b>Password</b></label>
+                        <input type="text" name="password" placeholder="password" class="input input-box-textinput" required/>
+                    </div>
+                </div>
+                
+                <!--login button-->
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+    </body>
+
+    <script src="scripts.js"></script>
+</html>

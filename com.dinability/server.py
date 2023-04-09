@@ -34,11 +34,11 @@ with app.app_context():#上下文
 
 class User(db.Model):
     __tablename__ = "User"
-    id = db.Column(db.Integer, unique=True, primary_key=True)
+    id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(50), unique=False, nullable=False)
-    email = db.Column(db.String(50), unique=True, nullable=False)
-    rating = db.Column(db.Integer, unique=False, primary_key=True)
+    password = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(50))
+    rating = db.Column(db.Integer)
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -62,24 +62,26 @@ class group_owner(User):
         return '<group owner %r>' % self.username
     
 class group(db.Model):
-    group_id = db.Column(db.Integer, unique=True, primary_key=True)
-    owner_id = db.Column(db.Integer, unique=False, primary_key=True) #use the owner object?
-    payment_method = db.Column(db.String(50), unique=True, nullable=False)
-    time_limit = db.Column(db.Integer, unique=False, primary_key=True)
-    restaurant_name = db.Column(db.String(50), unique=False, nullable=False)
-
+    group_id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
+    owner_id = db.Column(db.Integer, nullable=False) #use the owner object?
+    payment_method = db.Column(db.String(50), nullable=False)
+    time_limit = db.Column(db.Integer, nullable=False)
+    restaurant_name = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
         return '<group%r>' % str(self.group_id)
 
 class retaurant(db.Model):
-    Rating_Aspect_1 = db.Column(db.Integer, unique=False, primary_key=True)
-    Rating_Aspect_2 = db.Column(db.Integer, unique=False, primary_key=True)
-    Rating_Aspect_3 = db.Column(db.Integer, unique=False, primary_key=True)
-    Rating_Aspect_4 = db.Column(db.Integer, unique=False, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    menu = db.Column(db.String(50), unique=False, nullable=False)
-    location = db.Column(db.String(50), unique=True, nullable=False)
+    name = db.Column(db.String(50), nullable=False, primary_key=True)
+    picture = db.Column(db.String(50), nullable=False)
+    desciption = db.Column(db.String(50), nullable=False)
+    Rating_Aspect_1 = db.Column(db.Integer)
+    Rating_Aspect_2 = db.Column(db.Integer)
+    Rating_Aspect_3 = db.Column(db.Integer)
+    Rating_Aspect_4 = db.Column(db.Integer)
+    Rating_Aspect_5 = db.Column(db.Integer)
+    menu = db.Column(db.String(50))
+    location = db.Column(db.String(50))
 
     def __repr__(self):
         return '<restaurant %r>' % self.name
@@ -96,31 +98,32 @@ class menu(db.Model):
 ######
     
 class food(db.Model):
-    Rating_Aspect_1 = db.Column(db.Integer, unique=False, primary_key=True)
-    Rating_Aspect_2 = db.Column(db.Integer, unique=False, primary_key=True)
-    Rating_Aspect_3 = db.Column(db.Integer, unique=False, primary_key=True)
-    Rating_Aspect_4 = db.Column(db.Integer, unique=False, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    menu = db.Column(db.String(50), unique=False, nullable=False) # to be modified datatype of menu
-    location = db.Column(db.String(50), unique=True, nullable=False)
+    restaurant_name = db.Columns(db.String(50), nullable=False, primary_key=True)
+    name = db.Column(db.String(50), nullable=False, primary_key=True)
+    picture = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(50), nullable=False)
+    price = db.Column(db.Integer)
+    Rating_Aspect_1 = db.Column(db.Integer)
+    Rating_Aspect_2 = db.Column(db.Integer)
+    Rating_Aspect_3 = db.Column(db.Integer)
+    Rating_Aspect_4 = db.Column(db.Integer)
+    Rating_Aspect_5 = db.Column(db.Integer)
 
     def __repr__(self):
         return '<food %r>' % self.name
 
 class review_on_restaurant(db.Model):
-
-    user_id = db.Column(db.Integer(10), unique=True, nullable=False)
-    Time = db.Column(db.Integer(10), unique=False, nullable=False)
-    restaurant_name = db.Column(db.String(50), unique=True, nullable=False)
-    comment = db.Column(db.String(150), unique=False, nullable=False)
-    menu = db.Column(db.String(50), unique=False, nullable=False) # to be modified 
-    comment = db.Column(db.String(500), unique=False, nullable=False)
-    Rating_Aspect_1 = db.Column(db.Integer, unique=False, primary_key=True)
-    Rating_Aspect_2 = db.Column(db.Integer, unique=False, primary_key=True)
-    Rating_Aspect_3 = db.Column(db.Integer, unique=False, primary_key=True)
-    Rating_Aspect_4 = db.Column(db.Integer, unique=False, primary_key=True)
+    user_id = db.Column(db.Integer(10), nullable=False, primary_key=True)
+    Time = db.Column(db.Integer(10), nullable=False, primary_key=True)
+    restaurant_name = db.Column(db.String(50), nullable=False)
+    comment = db.Column(db.String(150))
+    # menu = db.Column(db.String(50), unique=False, nullable=False) # to be modified 
+    Rating_Aspect_1 = db.Column(db.Integer)
+    Rating_Aspect_2 = db.Column(db.Integer)
+    Rating_Aspect_3 = db.Column(db.Integer)
+    Rating_Aspect_4 = db.Column(db.Integer)
+    Rating_Aspect_5 = db.Column(db.Integer)
     
-
     def __repr__(self):
         return '<review_on_restaurant %r>' % self.retaurant_name
 

@@ -1,5 +1,16 @@
 /* TOP NAVIGATION */
 /* Add a black background color to the top navigation */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    background: linear-gradient(180deg, rgb(216, 215, 241) 0%, rgb(184, 161, 198) 100%);
+    margin: 0px;
+    align-items: center;
+    padding: 0px;  
+    height: 100%;
+    width: 100%;
+    /* overflow: hidden; */
+}
 .topnav {
     background-color: #333;
     overflow: hidden;
@@ -45,11 +56,12 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-    background-color: #680db3;
+    background-color: #7F628F;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
+    border-radius: 16px;
     cursor: pointer;
     width: 50%;
 }
@@ -86,3 +98,165 @@ button:hover {
       background-color: rgba(184, 161, 198, 0.08);
     }
 }
+
+
+
+
+/* login page */
+.register-screen{
+    /* align-items: flex-start; */
+    
+    display: flex;
+    height: 100%;
+    padding:50%;
+    width: 100%;
+}
+
+.nyush-dining-logo{
+    align-items: center;
+    /* position: relative; */
+    /* display:flex; */
+    margin-left: 56px;
+    min-width: 30%;
+    max-width: 50%;
+}
+.title-login{
+    color: #352d39;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    left:0;
+    letter-spacing: 1.3px;
+    line-height: 30px;
+    /* position: absolute; */
+    text-align: center;
+}
+
+.login-group{
+    align-items: flex-start;
+    display: flex;
+    height: 60%;
+    justify-content: flex-end;
+    min-width: 200px;
+    padding: 8.7px 22.2px;
+}
+.login-group1{
+    padding: 5px;
+
+    position: relative;
+    /* height: 258px;
+    width: 297px; */ 
+}
+.login-group2{
+    align-items: center;
+    background-color:#f2f1fd80;
+    border-radius:20px;
+    box-shadow: inset 0px 0px 5px 6px #ffffff40;
+    display:flex;
+    flex-direction: column;
+    margin: 60px;
+    /* min-height: 380px; */
+    padding: 60px;
+    min-width: 328px;
+}
+
+
+.input-box{
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: inset 0px 1px 8px 1px #bcbbdf;
+    display: flex;
+    height: 29px;
+    margin-top: 16px;
+    min-width: 266px;
+    padding: 11px 17px;
+}
+
+
+.btn-primary{
+    height: 60px;
+    margin-top: 26px;
+    min-width: 200px;
+    padding: 4.8px 0;
+}
+.btn-cancel{
+    height: 39px;
+    justify-content: flex-end;
+    min-width: 89px;
+    color: #352d39;
+    padding: 6.3px 9.9px;
+    background-color: transparent;
+    text-align: center;
+    border:3px solid #352d39;
+    font-family: 'Montserrat',sans-serif;
+    border-radius: 16px;
+}
+
+
+.btn-text{
+    color:#ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:400;
+    height:31px;
+    letter-spacing:0;
+    line-height: normal;
+    text-align:center;
+    width: 155px;
+}
+
+.button-submit{
+    padding: 20px 0px;
+}
+
+.flex-row{
+    align-items: flex-start;
+    display: flex;
+    gap: 7px;
+    margin-right: 1px;
+    margin-top: 37px;
+    min-width: 201px;
+}
+
+.have-account{
+    
+}
+
+input[type=text],select,textarea {
+    width: 100%;
+    background-color: transparent;
+    outline:0px none transparent;
+    font-family: 'Montserrat', sans-serif;
+    padding: 12px;
+    border: none ;
+    box-shadow: inset 0px 0px 5px 6px #ffffff40;
+    border-radius: 20px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #7F628F;
+    color: white;
+    font-family: 'Montserrat',sans-serif;
+    padding: 15px 110px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    margin: 0px 3.5%;
+    align-items: center;
+}
+input[type=submit]:hover {
+    background-color: #B8A1C6;
+}
+
+.form-container {
+outline: none;
+    border: none;
+}
+
+.suggest-text{
+    font-family: 'Montserrat',sans-serif;
+    color:#352d39;
+    font-size: 13px;
+}
+
+

@@ -179,6 +179,15 @@ button:hover {
     min-width: 200px;
     padding: 4.8px 0;
 }
+
+.btn-secondary{
+    height: 60px;
+    justify-content: flex-end;
+    margin-top: 26px;
+    min-width: 200px;
+    padding: 4.8px 0;
+}
+
 .btn-cancel{
     height: 39px;
     justify-content: flex-end;
@@ -259,4 +268,71 @@ outline: none;
     font-size: 13px;
 }
 
+/* FRONT PAGE */
+.front-screen{
+    /* align-items: flex-start; */
+    display: flex;
+    height: 100%;
+    padding:50%;
+    width: 100%;
+}
+.center-nav{
+    align-items: flex-start;
+    display: flex;
+    height: 60%;
+    justify-content: flex-end;
+    min-width: 200px;
+    padding: 8.7px 22.2px;
+}
+.center-nav1{
+    padding: 5px;
 
+    position: relative;
+    /* height: 258px;
+    width: 297px; */ 
+}
+.center-nav2{
+    align-items: center;
+    background-color:#f2f1fd80;
+    border-radius:20px;
+    box-shadow: inset 0px 0px 5px 6px #ffffff40;
+    display:flex;
+    flex-direction: column;
+    margin: 60px;
+    /* min-height: 380px; */
+    padding: 60px;
+    min-width: 328px;
+}
+.btn-restaurants {
+    background-color: #8691C9;
+    color: white;
+    font-family: 'Montserrat',sans-serif;
+    padding: 15px 110px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    margin: 0px 3.5%;
+    align-items: center;
+}
+.btn-rate {
+    background-color: #BCBBDF;
+    color: #564162;
+    font-family: 'Montserrat',sans-serif;
+    padding: 15px 110px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    margin: 0px 3.5%;
+    align-items: center;
+}
+.btn-groups {
+    background-color: #7F628F;
+    color: white;
+    font-family: 'Montserrat',sans-serif;
+    padding: 15px 110px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    margin: 0px 3.5%;
+    align-items: center;
+}

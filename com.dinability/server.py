@@ -227,14 +227,22 @@ def recommend_restaurant():
     
     # Find all restaurants with a rating greater than the provided rating
     recommended_restaurants = [restaurant for restaurant in restaurants.values() if restaurant['rating'] >= rating]
-    
-    # Return the recommended restaurants as JSON
-    return jsonify(recommended_restaurants)
+    if recommended_restaurants != []:
+        # Return the recommended restaurants as JSON
+        return jsonify(recommended_restaurants)
+    else:
+        return('No restaurant that meets the criteria')
 
 
     
 @app.route('/recommend/choose-restaurant', methods=['GET'])
-def choose_retaurant():
+def choose_retaurant(restaurant_name):
+    for restaurant in restaurant:
+        if restaurant_name == restaurant:
+            return jsonify(restaurant)
+            break
+    return("The restaurant is not included")
+            
 
 #Endpoint to retrieve all restaurants
 @app.route('/restaurants', methods=['GET'])
@@ -257,11 +265,11 @@ def get_restaurants():
 # Endpoint to retrieve a single restaurant by ID
 @app.route('/restaurants/<int:id>', methods=['GET'])
 def get_restaurant(id):
-    restaurant = next((r for r in restaurants if r['id'] == id), None)
-    if restaurant:
-        return jsonify(restaurant)
-    else:
-        return jsonify({"message": "Restaurant not found"}), 404
+    for restaurant in restaurant.keys():
+        if id == restaurant:
+            return jsonify(restaurant)
+            break
+    return jsonify({"message": "Restaurant not found"}), 404
 
 # Endpoint to create a new restaurant
 @app.route('/restaurants', methods=['POST'])

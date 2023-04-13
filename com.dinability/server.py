@@ -234,10 +234,22 @@ def recommend_restaurant():
         return jsonify(recommended_restaurants)
     else:
         return('No restaurant that meets the criteria')
+    if recommended_restaurants != []:
+        # Return the recommended restaurants as JSON
+        return jsonify(recommended_restaurants)
+    else:
+        return('No restaurant that meets the criteria')
 
 
     
 @app.route('/recommend/choose-restaurant', methods=['GET'])
+def choose_retaurant(restaurant_name):
+    for restaurant in restaurant:
+        if restaurant_name == restaurant:
+            return jsonify(restaurant)
+            break
+    return("The restaurant is not included")
+            
 def choose_retaurant(restaurant_name):
     for restaurant in restaurant:
         if restaurant_name == restaurant:
@@ -266,9 +278,9 @@ def get_restaurants():
 
 # Endpoint to retrieve a single restaurant by ID
 @app.route('/restaurants/<int:id>', methods=['GET'])
-def get_restaurant(restaurant_name):
+def get_restaurant(id):
     for restaurant in restaurant.keys():
-        if restaurant_name == restaurant:
+        if id == restaurant:
             return jsonify(restaurant)
             break
     return jsonify({"message": "Restaurant not found"}), 404

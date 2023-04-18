@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 body {
-    background: linear-gradient(180deg, rgb(216, 215, 241) 0%, rgb(184, 161, 198) 100%);
+    background: linear-gradient(90deg, rgb(216, 215, 241) 0%, rgb(184, 161, 198) 100%);
     margin: 0px;
     align-items: center;
     padding: 0px;  
@@ -58,6 +58,7 @@ input[type=text], input[type=password] {
 button {
     background-color: #7F628F;
     color: white;
+    font-family: 'Montserrat',sans-serif;;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -70,6 +71,8 @@ button {
 button:hover {
     opacity: 0.8;
 }
+
+
 
 /* Add padding to containers */
 .container {
@@ -275,86 +278,122 @@ input[type=submit]:hover {
     font-size: 13px;
 }
 
-/* FRONT/HOME PAGE */
-.homepage {
-    align-items: flex-start;
-    background-color: var(--nyushdining-colormin-purple3);
-    border: 1px none;
-    display: flex;
-    height: 844px;
-    overflow: hidden;
-    width: 390px;
-    
+
+/* homepage */
+.button-secondary{
+    padding: 15px;
+    width: 80%;
+    background-color: #BCBBDF;
+    color: #564162;
 }
 
-.hidden,
-.hidden * {
-    pointer-events: none;
-    visibility: hidden;
+.button-thirdly{
+    padding: 15px;
+    width: 80%;
+    background-color: #8691C9;
 }
 
-.overlap-group3 {
-    height: 1327px;
-    margin-left: -254px;
-    margin-top: -132.9px;
-    position: relative;
-    width: 965px;
+.button-primary{
+    padding: 15px;
+    width: 80%;
 }
 
-.spoon {
-    height: 259px;
-    /*left: 319px;*/
-    align-items: end;
-    position: absolute;
-    top: 718px;
-    width: 325px;
-}
 
-.component-2 {
+.homepage-group{
     align-items: flex-start;
     display: flex;
-    height: 186px;
-    left: 442px;
-    min-width: 214px;
-    position: absolute;
-    top: 194px;
+    height: 60%;
+    justify-content: flex-end;
+    min-width: 200px;
+    padding: 8.7px 22.2px;
 }
+.homepage-group1{
+    padding: 5px;
 
-.nyush-container {
-    height: 186px
     position: relative;
-    width: 214px;
+    /* height: 258px;
+    width: 297px; */ 
+}
+.homepage-group2{
+    align-items: right;
+    display:flex;
+    flex-direction: column;
+    /* min-height: 380px; */
+    padding: 100px;
+    width: 100%;
+    height: 100%;
 }
 
-.ellipse-8 {
-    background-color: var(--nyushdining-colormin-purple3);
-    border-radius: 269.13px/170.23px;
-    height: 340px;
-    left: 206px;
+.plate{
     position: absolute;
-    top: 702px;
-    transform: rotate(-15.83deg);
-    width: 538px;
+    top: 30%;
+    left: 10%;
+    min-width: 39%;
+    max-width: 80%;
 }
 
-.ellipse-6 {
-    background-color: var(--nyushdining-colormin-purple1);
-    border-radius: 163.19px/166.13px;
-    height: 332px;
-    left: 196px;
+.fork{
     position: absolute;
-    top: 83px;
-    transform: rotate(13.28deg);
-    width: 326px;
+    right: 65%;
+    top: .1%;
+    min-width: 500px;
+    max-width: 800px;
+    z-index: -1;
+
 }
 
-.ellipse-7 {
-    background-color: #a78ebb/*var(--nyushdining-colormin-purple3);
-    border-radius: 322.39px/359.06px*/;
-    height: 718px;
-    left: 139px;
+.spoon{
     position: absolute;
-    top: 495px;
-    transform: rotate(149.06deg);
-    width: 645px;
+    bottom: 3%;
+    left: 20%;
+    min-width: 500px;
+    max-width: 800px;
+    z-index: -1;
+}
+
+.home-button-group{
+  
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+
+.page-nyush-logo{
+    position: absolute;
+
+    margin-left: 25%;
+    top: 12%;
+    min-width: 200px;
+    max-width: 500px;
+}
+
+
+/* find restaurant */
+.find-restaurant-group{
+background-color:#D3D2E2;
+align-items: flex-start;
+    display: flex;
+    height: 60%;
+    justify-content: flex-end;
+    min-width: 200px;
+    padding: 8.7px 22.2px;
+
+}
+
+.nyush-logo-restaurant{
+    position: absolute;
+    fill: #5D69A7 !important;
+    left: 35%;
+    top: 5%;
+    min-width: 100px;
+    max-width: 200px;
+}
+
+.small-plate{
+    position: absolute;
+    margin-right: 600px;
+    min-width: 10%;
+    max-width: 20%;
+    z-index: -1;
 }

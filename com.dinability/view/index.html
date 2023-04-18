@@ -3,38 +3,29 @@
 <html>
     <head>
         <!--adjusts for mobile & desktop view-->
-        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-
-        <!--js file and css-->
-        <script type="text/javascript" src="scripts.js"></script>
-        <script src="scripts.js"></script>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <link href="./styles.css" rel="stylesheet" />
-        <title>Dinability Profile</title>
-        
-
+        <script type="text/javascript" src="scripts.js"></script>
+        <title>Homepage</title>
     </head>
-
     <body>
-        <div class="homepage screen">
-            <div class="overlap-group3">
-                <div class="ellipse-6"></div>
-                <div class="ellipse-8"></div>
-                <div class="ellipse-7"></div>
-                <div class="ellipse-7-1"></div>
-                <div class="ellipse-1"></div>
-                <img class="fork" src="/com.dinability/assets/fork.svg" alt="fork"/>
-                <img class="spoon" src="/com.dinability/assets/spoon.svg" />
-                <div class="component-2">
-                    <div class="nyush-container">
-                        <!--edit for home page-->
-                        <img class="nyush-dining-logo" src="/com.dinability/assets/NYUSHdiningLogo.svg" alt="nyush-dining-logo" />
-                        <div class="title-login">DINENYUSH</div>
-                    </div>
-                </div>
-                <div class="ellipse-7-2"></div>
-                <!--make buttons-->
+        <div class = "homepage-group2">
+
+            <div class="page-nyush-logo">
+                <img src="/com.dinability/assets/NYUSHdiningLogo.svg" alt="NYUSHDiningLogo" />
             </div>
+
+            <img class="fork" src="/com.dinability/assets/fork.svg" alt="fork"/>
+            <div class="plate">
+                <img src="/com.dinability/assets/plate.svg" alt="plate"/>
+                <div class="home-button-group">
+                    <button type="button" class="button-thirdly" onclick="location.href='./restaurants.html'">Find Restaurant</button>
+                    <button type="button" class="button-secondary" onclick="location.href='./rate.html'">Rate Restaurant</button>
+                    <button type="button" class="button-primary" onclick="location.href='./groups.html'">Order Group</button>
+                </div>
+            </div>
+            <img class="spoon" src="/com.dinability/assets/spoon.svg" alt="spoon"/>     
+
         </div>
-        
     </body>
 </html>

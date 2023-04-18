@@ -4,6 +4,7 @@
 
 body {
     background: linear-gradient(90deg, rgb(216, 215, 241) 0%, rgb(184, 161, 198) 100%);
+    background: linear-gradient(90deg, rgb(216, 215, 241) 0%, rgb(184, 161, 198) 100%);
     margin: 0px;
     align-items: center;
     padding: 0px;  
@@ -59,7 +60,7 @@ input[type=text], input[type=password] {
 button {
     background-color: #7F628F;
     color: white;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat',sans-serif;;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -72,6 +73,8 @@ button {
 button:hover {
     opacity: 0.8;
 }
+
+
 
 
 
@@ -279,116 +282,24 @@ input[type=submit]:hover {
     font-size: 13px;
 }
 
-/* FRONT/HOME PAGE */
-.homepage {
-    align-items: flex-start;
-    background-color: var(--nyushdining-colormin-purple3);
-    border: 1px none;
-    display: flex;
-    height: 844px;
-    overflow: hidden;
-    width: 390px;
-    
-}
 
-.hidden,
-.hidden * {
-    pointer-events: none;
-    visibility: hidden;
-}
-
-.overlap-group3 {
-    height: 1327px;
-    margin-left: -254px;
-    margin-top: -132.9px;
-    position: relative;
-    width: 965px;
-}
-
-.spoon {
-    height: 259px;
-    /*left: 319px;*/
-    align-items: end;
-    position: absolute;
-    top: 718px;
-    width: 325px;
-}
-
-.component-2 {
-    align-items: flex-start;
-    display: flex;
-    height: 186px;
-    left: 442px;
-    min-width: 214px;
-    position: absolute;
-    top: 194px;
-}
-
-.nyush-container {
-    height: 186px
-    position: relative;
-    width: 214px;
-}
-
-.ellipse-8 {
-    background-color: var(--nyushdining-colormin-purple3);
-    border-radius: 269.13px/170.23px;
-    height: 340px;
-    left: 206px;
-    position: absolute;
-    top: 702px;
-    transform: rotate(-15.83deg);
-    width: 538px;
-}
-
-.ellipse-6 {
-    background-color: var(--nyushdining-colormin-purple1);
-    border-radius: 163.19px/166.13px;
-    height: 332px;
-    left: 196px;
-    position: absolute;
-    top: 83px;
-    transform: rotate(13.28deg);
-    width: 326px;
-}
-
-.ellipse-7 {
-    background-color: #a78ebb/*var(--nyushdining-colormin-purple3);
-    border-radius: 322.39px/359.06px*/;
-    height: 718px;
-    left: 139px;
-    position: absolute;
-    top: 495px;
-    transform: rotate(149.06deg);
-    width: 645px;
-}
-.btn-groups {
-    background-color: #7F628F;
-    color: white;
-    font-family: 'Montserrat',sans-serif;
-    padding: 15px 110px;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    margin: 0px 3.5%;
-    align-items: center;
-}/* homepage */
+/* homepage */
 .button-secondary{
     padding: 15px;
-    width: 180px;
+    width: 80%;
     background-color: #BCBBDF;
     color: #564162;
 }
 
 .button-thirdly{
     padding: 15px;
-    width: 180px;
+    width: 80%;
     background-color: #8691C9;
 }
 
 .button-primary{
     padding: 15px;
-    width: 180px;
+    width: 80%;
 }
 
 
@@ -419,28 +330,28 @@ input[type=submit]:hover {
 
 .plate{
     position: absolute;
-    top: 26%;
-    right: 50%;
+    top: 30%;
+    left: 10%;
     min-width: 39%;
     max-width: 80%;
 }
 
 .fork{
     position: absolute;
-    left: -220px;
-    top: -100px;
-    min-width: 450px;
-    max-width: 600px;
+    right: 65%;
+    top: .1%;
+    min-width: 500px;
+    max-width: 800px;
     z-index: -1;
 
 }
 
 .spoon{
     position: absolute;
-    bottom: -130px;
+    bottom: 3%;
     left: 20%;
-    min-width: 450px;
-    max-width: 600px;
+    min-width: 500px;
+    max-width: 800px;
     z-index: -1;
 }
 
@@ -448,7 +359,7 @@ input[type=submit]:hover {
   
     position: absolute;
     top: 50%;
-    left: 75%;
+    left: 55%;
     transform: translate(-50%, -50%);
 }
 
@@ -456,7 +367,7 @@ input[type=submit]:hover {
     position: absolute;
 
     margin-left: 25%;
-    top: 50px;
+    top: 12%;
     min-width: 200px;
     max-width: 500px;
 }
@@ -464,86 +375,32 @@ input[type=submit]:hover {
 
 /* find restaurant */
 .find-restaurant-group{
-    background-color:#D3D2E2;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    /* overflow: auto; */
+background-color:#D3D2E2;
+align-items: flex-start;
+    display: flex;
+    height: 60%;
+    justify-content: flex-end;
+    min-width: 200px;
+    padding: 8.7px 22.2px;
 
-}
-
-.find-restaurant-group2{
-    padding:10px;
-    left:50%;
-    bottom:50%;
-}
-
-.fork-page{
-    position: absolute;
-    left: -100px;
-    top: 30%;
-    min-width: 300px;
-    max-width: 500px;
-}
-
-.spoon-page{
-    position: absolute;
-    bottom: 15%;
-    right: -100px;
-    min-width: 300px;
-  
 }
 
 .nyush-logo-restaurant{
     position: absolute;
     fill: #5D69A7 !important;
-    right: 25px;
-    top: 20px;
-    min-width: 50px;
-    max-width: 135px;
+    left: 35%;
+    top: 5%;
+    min-width: 100px;
+    max-width: 200px;
 }
 
 .small-plate{
     position: absolute;
-    left:-100px;
-    top: -100px;
+    margin-right: 600px;
     min-width: 10%;
-    max-width: 30%;
- 
+    max-width: 20%;
+    z-index: -1;
 }
-
-.find-title{
-    position: absolute;
-    font-family: 'Montserrat',sans-serif;
-    font-weight: 2500;
-    font-size:40px;
-    left: 130px;
-    top: 130px;
-}
-
-
-.bottom-tabs{
-    position: absolute;
-    bottom: -10px;
-    left:-13px;
-    width: 600px;
-
-}
-
-.find-card{
-    position:relative;
-    left:15%;
-    top:25%;
-}
-
-
-.group-card{
-    position:relative;
-    margin: 10% 0;
-    left:5%;
-   
 
 }
 .group-cards{

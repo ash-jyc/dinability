@@ -10,6 +10,7 @@ body {
     height: 100%;
     width: 100%;
     overflow: hidden;
+    font-family:'Montserrat',sans-serif;
 }
 .topnav {
     background-color: #333;
@@ -282,20 +283,20 @@ input[type=submit]:hover {
 /* homepage */
 .button-secondary{
     padding: 15px;
-    width: 80%;
+    width: 180px;
     background-color: #BCBBDF;
     color: #564162;
 }
 
 .button-thirdly{
     padding: 15px;
-    width: 80%;
+    width: 180px;
     background-color: #8691C9;
 }
 
 .button-primary{
     padding: 15px;
-    width: 80%;
+    width: 180px;
 }
 
 
@@ -326,28 +327,28 @@ input[type=submit]:hover {
 
 .plate{
     position: absolute;
-    top: 30%;
-    left: 10%;
+    top: 26%;
+    right: 50%;
     min-width: 39%;
     max-width: 80%;
 }
 
 .fork{
     position: absolute;
-    right: 65%;
-    top: .1%;
-    min-width: 500px;
-    max-width: 800px;
+    left: -220px;
+    top: -100px;
+    min-width: 450px;
+    max-width: 600px;
     z-index: -1;
 
 }
 
 .spoon{
     position: absolute;
-    bottom: 3%;
+    bottom: -130px;
     left: 20%;
-    min-width: 500px;
-    max-width: 800px;
+    min-width: 450px;
+    max-width: 600px;
     z-index: -1;
 }
 
@@ -355,7 +356,7 @@ input[type=submit]:hover {
   
     position: absolute;
     top: 50%;
-    left: 55%;
+    left: 75%;
     transform: translate(-50%, -50%);
 }
 
@@ -363,7 +364,7 @@ input[type=submit]:hover {
     position: absolute;
 
     margin-left: 25%;
-    top: 12%;
+    top: 50px;
     min-width: 200px;
     max-width: 500px;
 }

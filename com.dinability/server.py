@@ -74,6 +74,10 @@ api.add_resource(User_Resource, '/user')
 def index():
     return render_template("index.html")
 
+@app.route("/register")
+def index():
+    return render_template("index.html")
+
 
 # @app.route("/register", methods=["POST"])
 # def register():

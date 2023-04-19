@@ -23,7 +23,7 @@ function login() {
     var data = { name: name, email: email, password: password };
 
     // Send a POST request to the API endpoint with the JSON data
-    fetch('/login', {
+    fetch('/loginPage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

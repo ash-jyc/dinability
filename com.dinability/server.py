@@ -71,7 +71,7 @@ class group(db.Model):
     def __repr__(self):
         return '<group%r>' % str(self.group_id)
 
-class retaurant(db.Model):
+class restaurant(db.Model):
     name = db.Column(db.String(50), nullable=False, primary_key=True)
     picture = db.Column(db.String(50), nullable=False)
     desciption = db.Column(db.String(50), nullable=False)
@@ -173,8 +173,10 @@ def login():
 
 @app.route("/user/update")
 def update_user():
-    user = User.query.filter_by(username= "blabla").first()
-    user.password = "333333"
+    username = input("Username: ")
+    password = input("Password: ")
+    user = User.query.filter_by(username).first()
+    user.password = password
     #synchronization in database
     db.session.commit()
     return "Updated"
@@ -264,23 +266,23 @@ def get_restaurants():
 
 # Endpoint to retrieve a single restaurant by ID
 @app.route('/restaurants/<int:id>', methods=['GET'])
-def get_restaurant(id):
+def get_restaurant(restaurant_name):
     for restaurant in restaurant.keys():
-        if id == restaurant:
+        if restaurant_name == restaurant:
             return jsonify(restaurant)
             break
     return jsonify({"message": "Restaurant not found"}), 404
 
 # Endpoint to create a new restaurant
 @app.route('/restaurants', methods=['POST'])
-def create_restaurant():
+def create_restaurant(name,address,cuisine,rating,reviews):
     # Get data from request body
     data = request.get_json()
-    name = data.get('name')
-    address = data.get('address')
-    cuisine = data.get('cuisine')
-    rating = data.get('rating', 0)
-    reviews = data.get('reviews', 0)
+    name = data.get(str(name))
+    address = data.get(str(address))
+    cuisine = data.get(str(cuisine))
+    rating = data.get(str(rating), 0)
+    reviews = data.get(str(reviews), 0)
     
     # Generate new ID
     new_id = max(r['id'] for r in restaurants) + 1

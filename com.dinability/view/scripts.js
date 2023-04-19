@@ -11,14 +11,12 @@
     // return if able to enter
 }
 
-const form = document.querySelector('form');
-form.addEventListener('submit', handleSubmit);*/
-
+*/
 
 function login() {
     // Get the user's email, username, and password from the form
     var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value; // email has not been created in html yet
+    var email = document.getElementById("email").value;
     var password = document.getElementById("psw").value;
 
     // Create a JSON object with the user's email, username, and password
@@ -45,3 +43,37 @@ function login() {
         console.error('Error:', error);
     });
 }
+
+function register() {
+    // Get the user's email, username, and password from the form
+    var name = document.getElementById("name").value;
+    var password = document.getElementById("psw").value;
+
+    // Create a JSON object with the user's email, username, and password
+    var data = { name: name, password: password };
+
+    // Send a POST request to the API endpoint with the JSON data
+    fetch('/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            // Redirect the user to their profile page
+            window.location.href = '/login';
+        } else {
+            // Display an error message to the user
+            alert('Invalid credentials. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+const form = document.querySelector('form');
+form.addEventListener('Login', login());
+form.addEventListener('Register', register());

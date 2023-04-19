@@ -39,7 +39,7 @@ body {
 
 /* USERNAME PASSWORD BOX */
 /* Bordered form */
-form {
+/*form {
     border: 3px solid #f1f1f1;
 }
 
@@ -141,7 +141,6 @@ button:hover {
 }
 .login-group1{
     padding: 5px;
-
     position: relative;
     /* height: 258px;
     width: 297px; */ 
@@ -172,7 +171,7 @@ button:hover {
     padding: 11px 17px;
 }
 
-
+/com.dinability/assets/NYUSHdiningLogo.svg
 .btn-primary{
     height: 60px;
     margin-top: 26px;
@@ -182,10 +181,18 @@ button:hover {
 
 .btn-secondary{
     height: 60px;
-    justify-content: flex-end;
     margin-top: 26px;
     min-width: 200px;
-    padding: 4.8px 0;
+    padding: 15px 110px;
+    border: none;
+    border-radius: 16px;
+    font-family: 'Montserrat',sans-serif;
+    padding: 15px 110px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    margin: 0px 3.5%;
+    align-items: center;
 }
 
 .btn-cancel{
@@ -258,7 +265,7 @@ input[type=submit]:hover {
 }
 
 .form-container {
-outline: none;
+    outline: none;
     border: none;
 }
 
@@ -268,71 +275,86 @@ outline: none;
     font-size: 13px;
 }
 
-/* FRONT PAGE */
-.front-screen{
-    /* align-items: flex-start; */
+/* FRONT/HOME PAGE */
+.homepage {
+    align-items: flex-start;
+    background-color: var(--nyushdining-colormin-purple3);
+    border: 1px none;
     display: flex;
-    height: 100%;
-    padding:50%;
-    width: 100%;
+    height: 844px;
+    overflow: hidden;
+    width: 390px;
+    
 }
-.center-nav{
+
+.hidden,
+.hidden * {
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.overlap-group3 {
+    height: 1327px;
+    margin-left: -254px;
+    margin-top: -132.9px;
+    position: relative;
+    width: 965px;
+}
+
+.spoon {
+    height: 259px;
+    /*left: 319px;*/
+    align-items: end;
+    position: absolute;
+    top: 718px;
+    width: 325px;
+}
+
+.component-2 {
     align-items: flex-start;
     display: flex;
-    height: 60%;
-    justify-content: flex-end;
-    min-width: 200px;
-    padding: 8.7px 22.2px;
+    height: 186px;
+    left: 442px;
+    min-width: 214px;
+    position: absolute;
+    top: 194px;
 }
-.center-nav1{
-    padding: 5px;
 
+.nyush-container {
+    height: 186px
     position: relative;
-    /* height: 258px;
-    width: 297px; */ 
+    width: 214px;
 }
-.center-nav2{
-    align-items: center;
-    background-color:#f2f1fd80;
-    border-radius:20px;
-    box-shadow: inset 0px 0px 5px 6px #ffffff40;
-    display:flex;
-    flex-direction: column;
-    margin: 60px;
-    /* min-height: 380px; */
-    padding: 60px;
-    min-width: 328px;
+
+.ellipse-8 {
+    background-color: var(--nyushdining-colormin-purple3);
+    border-radius: 269.13px/170.23px;
+    height: 340px;
+    left: 206px;
+    position: absolute;
+    top: 702px;
+    transform: rotate(-15.83deg);
+    width: 538px;
 }
-.btn-restaurants {
-    background-color: #8691C9;
-    color: white;
-    font-family: 'Montserrat',sans-serif;
-    padding: 15px 110px;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    margin: 0px 3.5%;
-    align-items: center;
+
+.ellipse-6 {
+    background-color: var(--nyushdining-colormin-purple1);
+    border-radius: 163.19px/166.13px;
+    height: 332px;
+    left: 196px;
+    position: absolute;
+    top: 83px;
+    transform: rotate(13.28deg);
+    width: 326px;
 }
-.btn-rate {
-    background-color: #BCBBDF;
-    color: #564162;
-    font-family: 'Montserrat',sans-serif;
-    padding: 15px 110px;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    margin: 0px 3.5%;
-    align-items: center;
-}
-.btn-groups {
-    background-color: #7F628F;
-    color: white;
-    font-family: 'Montserrat',sans-serif;
-    padding: 15px 110px;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    margin: 0px 3.5%;
-    align-items: center;
+
+.ellipse-7 {
+    background-color: #a78ebb/*var(--nyushdining-colormin-purple3);
+    border-radius: 322.39px/359.06px*/;
+    height: 718px;
+    left: 139px;
+    position: absolute;
+    top: 495px;
+    transform: rotate(149.06deg);
+    width: 645px;
 }

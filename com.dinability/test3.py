@@ -1,9 +1,8 @@
 import Models
-import Fields
 import Schemas
 from Models import app, db
 from flask_restful import Resource, Api, marshal_with
-from flask import jsonify, abort, request
+from flask import jsonify, abort, request, render_template
 from sqlalchemy import or_, exc
 
 api = Api(app)
@@ -70,6 +69,22 @@ class User_Resource(Resource):
         
 
 api.add_resource(User_Resource, '/user')
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+# @app.route("/")
+# def index():
+#     return render_template("index.html")
+    
+# @app.route("/")
+# def index():
+#     return render_template("index.html")
+
+# @app.route("/")
+# def index():
+#     return render_template("index.html")
 
 
 if __name__ == '__main__':

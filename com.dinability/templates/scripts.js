@@ -20,7 +20,7 @@ function login() {
     var password = document.getElementById("psw").value;
 
     // Create a JSON object with the user's email, username, and password
-    var data = { name: name, email: email, password: password };
+    var data = { "username": name, "email": email, "password": password };
 
     // Send a POST request to the API endpoint with the JSON data
     fetch('/login', {
@@ -51,7 +51,7 @@ function register() {
     var password = document.getElementById("psw").value;
 
     // Create a JSON object with the user's email, username, and password
-    var data = { name: name, email: email, password: password };
+    var data = { "username": name, "email": email, "password": password };
 
     // Send a POST request to the API endpoint with the JSON data
     fetch('/register', {

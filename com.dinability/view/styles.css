@@ -4,7 +4,6 @@
 
 body {
     background: linear-gradient(90deg, rgb(216, 215, 241) 0%, rgb(184, 161, 198) 100%);
-    background: linear-gradient(90deg, rgb(216, 215, 241) 0%, rgb(184, 161, 198) 100%);
     margin: 0px;
     align-items: center;
     padding: 0px;  
@@ -41,7 +40,7 @@ body {
 
 /* USERNAME PASSWORD BOX */
 /* Bordered form */
-/*form {
+form {
     border: 3px solid #f1f1f1;
 }
 
@@ -73,8 +72,6 @@ button {
 button:hover {
     opacity: 0.8;
 }
-
-
 
 
 
@@ -148,6 +145,7 @@ button:hover {
 }
 .login-group1{
     padding: 5px;
+
     position: relative;
     /* height: 258px;
     width: 297px; */ 
@@ -178,30 +176,13 @@ button:hover {
     padding: 11px 17px;
 }
 
-/com.dinability/assets/NYUSHdiningLogo.svg
+
 .btn-primary{
     height: 60px;
     margin-top: 26px;
     min-width: 200px;
     padding: 4.8px 0;
 }
-
-.btn-secondary{
-    height: 60px;
-    margin-top: 26px;
-    min-width: 200px;
-    padding: 15px 110px;
-    border: none;
-    border-radius: 16px;
-    font-family: 'Montserrat',sans-serif;
-    padding: 15px 110px;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    margin: 0px 3.5%;
-    align-items: center;
-}
-
 .btn-cancel{
     height: 39px;
     justify-content: flex-end;
@@ -272,7 +253,7 @@ input[type=submit]:hover {
 }
 
 .form-container {
-    outline: none;
+outline: none;
     border: none;
 }
 
@@ -443,20 +424,6 @@ input[type=submit]:hover {
 
 }
 
-}
-.group-cards{
-    position: relative;
-    top: 23%;
-}
-
-.group-card-text{
-    position: absolute;
-    font-family: 'Montserrat',sans-serif;
-    font-weight: 2500;
-    font-size:40px;
-    left: 80px;
-    top: 40px;
-}
 .find-card{
     position:relative;
     left:15%;

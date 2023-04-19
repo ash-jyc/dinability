@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, session,json
-import pysql
+# import pysql
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()

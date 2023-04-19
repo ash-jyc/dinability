@@ -430,9 +430,7 @@ input[type=submit]:hover {
     top: 130px;
 }
 
-.bottom-tab{
 
-}
 .bottom-tabs{
     position: absolute;
     bottom: -10px;
@@ -445,4 +443,25 @@ input[type=submit]:hover {
     position:relative;
     left:15%;
     top:25%;
+}
+
+
+.group-card{
+    position:relative;
+    margin: 10% 0;
+    left:5%;
+   
+}
+.group-cards{
+    position: relative;
+    top: 23%;
+}
+
+.group-card-text{
+    position: absolute;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 2500;
+    font-size:40px;
+    left: 80px;
+    top: 40px;
 }

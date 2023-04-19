@@ -60,7 +60,7 @@ input[type=text], input[type=password] {
 button {
     background-color: #7F628F;
     color: white;
-    font-family: 'Montserrat',sans-serif;;
+    font-family: 'Montserrat',sans-serif;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -375,31 +375,74 @@ input[type=submit]:hover {
 
 /* find restaurant */
 .find-restaurant-group{
-background-color:#D3D2E2;
-align-items: flex-start;
-    display: flex;
-    height: 60%;
-    justify-content: flex-end;
-    min-width: 200px;
-    padding: 8.7px 22.2px;
+    background-color:#D3D2E2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* overflow: auto; */
 
+}
+
+.find-restaurant-group2{
+    padding:10px;
+    left:50%;
+    bottom:50%;
+}
+
+.fork-page{
+    position: absolute;
+    left: -100px;
+    top: 30%;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.spoon-page{
+    position: absolute;
+    bottom: 15%;
+    right: -100px;
+    min-width: 300px;
+  
 }
 
 .nyush-logo-restaurant{
     position: absolute;
     fill: #5D69A7 !important;
-    left: 35%;
-    top: 5%;
-    min-width: 100px;
-    max-width: 200px;
+    right: 25px;
+    top: 20px;
+    min-width: 50px;
+    max-width: 135px;
 }
 
 .small-plate{
     position: absolute;
-    margin-right: 600px;
+    left:-100px;
+    top: -100px;
     min-width: 10%;
-    max-width: 20%;
-    z-index: -1;
+    max-width: 30%;
+ 
+}
+
+.find-title{
+    position: absolute;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 2500;
+    font-size:40px;
+    left: 130px;
+    top: 130px;
+}
+
+.bottom-tab{
+
+}
+.bottom-tabs{
+    position: absolute;
+    bottom: -10px;
+    left:-13px;
+    width: 600px;
+
 }
 
 }
@@ -415,4 +458,9 @@ align-items: flex-start;
     font-size:40px;
     left: 80px;
     top: 40px;
+}
+.find-card{
+    position:relative;
+    left:15%;
+    top:25%;
 }

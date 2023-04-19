@@ -47,10 +47,11 @@ function login() {
 function register() {
     // Get the user's email, username, and password from the form
     var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
     var password = document.getElementById("psw").value;
 
     // Create a JSON object with the user's email, username, and password
-    var data = { name: name, password: password };
+    var data = { name: name, email: email, password: password };
 
     // Send a POST request to the API endpoint with the JSON data
     fetch('/register', {

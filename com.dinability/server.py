@@ -106,6 +106,11 @@ def login():
 def profile():
     return render_template("profile.html")
 
+@app.route("/groups")
+@login_required
+def groups():
+    return render_template("groups.html")
+
 # @app.route("/register", methods=["POST"])
 # def register():
 #     form = request.form.to_dict()

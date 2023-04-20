@@ -14,7 +14,7 @@ loginmanager.login_view = 'login'
 
 @loginmanager.user_loader
 def load_user(user_id):
-    Models.User.query.get(int(user_id))
+    return Models.User.query.get(int(user_id))
 
 
 class User_Resource(Resource):
@@ -96,7 +96,6 @@ def login():
         user = Models.User.query.filter_by(username=username).first_or_404()
         if user.email == email and user.password == password:
             login_user(user)
-            print(current_user.username)
             return redirect(request.args.get('next') or url_for('profile'))
         else:
             flash('Wrong email or password! Try again!')

@@ -1,11 +1,20 @@
 import Models
 import Schemas
 from Models import app, db
-from flask_restful import Resource, Api, marshal_with
-from flask import jsonify, abort, request, render_template
-from sqlalchemy import or_, exc
+from flask_restful import Resource, Api
+from flask import jsonify, abort, request, render_template, redirect, url_for, flash
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from sqlalchemy import exc
 
 api = Api(app)
+
+loginmanager = LoginManager()
+loginmanager.init_app(app)
+loginmanager.login_view = 'login'
+
+@loginmanager.user_loader
+def load_user(user_id):
+    Models.User.query.get(int(user_id))
 
 
 class User_Resource(Resource):
@@ -78,11 +87,23 @@ def index():
 def register():
     return render_template("register.html")
 
-@app.route("/login")
+@app.route("/login", methods=['GET','POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user = Models.User.query.filter_by(username=username).first_or_404()
+        if user.email == email and user.password == password:
+            login_user(user)
+            print(current_user.username)
+            return redirect(request.args.get('next') or url_for('profile'))
+        else:
+            flash('Wrong email or password! Try again!')
     return render_template("login.html")
 
 @app.route("/profile")
+@login_required
 def profile():
     return render_template("profile.html")
 

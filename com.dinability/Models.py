@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 username = "root"
 password = ""
@@ -41,7 +42,7 @@ class Food(db.Model):
     def __repr__(self):
         return '<Food %r %r>' % (str(self.restaurant_name), str(self.food_name))
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'user'
     id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), unique=True, nullable=False)

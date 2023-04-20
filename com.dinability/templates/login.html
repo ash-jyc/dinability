@@ -3,20 +3,27 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./styles.css" rel="stylesheet" />
-    <script type="text/javascript" src="scripts.js"></script>
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <script type="text/javascript" src="/static/js/scripts.js"></script>
     <title>Dinability Login</title>
 </head>
 
 <body>
     <!-- <div class="register-screen"> -->
+    {% with messages = get_flashed_messages() %}
+         {% if messages %}
+               {% for message in messages %}
+                    <p>{{ message }}</p>
+               {% endfor %}
+         {% endif %}
+    {% endwith %}
     <div class="login-group2">
         <div class="login-group1">
-            <img class="nyush-dining-logo" src="/com.dinability/assets/NYUSHdiningLogo.svg" alt="NYUSHDiningLogo" />
+            <img class="nyush-dining-logo" src="/static/img/NYUSHdiningLogo.svg" alt="NYUSHDiningLogo" />
             <h1 class="title-login">DINENYUSH</h1>
         </div>
         <div class="login-group">
-            <form method="GET" class="form-container" action="/login">
+            <form method="POST" class="form-container" action="/login">
                 <div class="input-box">
                     <input type="text" id="name" name="username" placeholder="Your name...">
                 </div>
@@ -30,7 +37,7 @@
                     <input type="submit" value="Login">
                 </div>
                 
-                <button type="button" class="btn-cancel" onclick="location.href='./register.html'"> Register</button>
+                <button type="button" class="btn-cancel" onclick="location.href='/register'"> Register</button>
 
             </form>
         </div>

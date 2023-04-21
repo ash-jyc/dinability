@@ -98,7 +98,6 @@ def index():
 
 @app.route("/register", methods=['GET','POST'])
 def register():
-    print(request.method)
     if request.method == 'POST':
         username = request.form.get('username')
         email = request.form.get('email')
@@ -117,14 +116,13 @@ def register():
 @app.route("/login", methods=['GET','POST'])
 def login():
     if request.method == 'POST':
-        print(request.args.get('next'))
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
         user = Models.User.query.filter_by(username=username).first_or_404()
         if user.email == email and user.password == password:
             login_user(user)
-            return redirect(request.args.get('next') or url_for('profile'))
+            return redirect(url_for('index'))
         else:
             flash('Wrong email or password! Try again!')
     return render_template("login.html")

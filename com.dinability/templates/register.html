@@ -14,27 +14,7 @@
                       {% endfor %}
                 {% endif %}
            {% endwith %}
-            <div class = "login-group2">
-                <div class="login-group1">
-                    <img class="nyush-dining-logo" src="/static/img/NYUSHdiningLogo.svg" alt="NYUSHDiningLogo" />
-                    <h1 class="title-login">DINENYUSH</h1>
-                </div>
-                <div class="login-group">
-                    <form method="POST" class="form-container" action="/register">
-                        <div class="input-box">
-                            <input type="text" id="name" name="username" placeholder="Your name...">
-                        </div>
-                        <div class="input-box">
-                            <input type="text" id="email" name="email" placeholder="Your email...">
-                        </div>
-                        <div class="input-box">
-                            <input type="text" id="psw" name="password" placeholder="Your password...">
-                        </div>
-                        <div class="button-submit">
-                            <input type="submit" value="Register">
-                        </div>
-                    </form>
-                </div>
+            
             <div class = "login-group2">
                 <div class="login-group1">
                     <img class="nyush-dining-logo" src="/static/img/NYUSHdiningLogo.svg" alt="NYUSHDiningLogo" />
@@ -57,39 +37,9 @@
                     </form>
                 </div>
 
-                <script>
-                    var name = document.getElementById("name").value;
-                    var email = document.getElementById("email").value;
-                    var password = document.getElementById("psw").value;
-
-                    // Create a JSON object with the user's email, username, and password
-                    var data = { "username": name, "email": email, "password": password };
-
-                    // Send a POST request to the API endpoint with the JSON data
-                    fetch('/register', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            // Redirect the user to their profile page
-                            window.location.href = '/login';
-                        } else {
-                            // Display an error message to the user
-                            alert('Invalid credentials. Please try again.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                </script>
-
                 <div class="login-group">
                     <p class="suggest-text">Already have an account?</p>
-                        <button type="button" class="btn-cancel" onclick="location.href='./loginPage.html'"> Login</button>
+                        <button type="button" class="btn-cancel" onclick="location.href='/login'"> Login</button>
                     
                     
                 </div>

@@ -111,6 +111,16 @@ def profile():
 def groups():
     return render_template("groups.html")
 
+@app.route("/rate")
+@login_required
+def rate():
+    return render_template("rate.html")
+
+@app.route("/find")
+@login_required
+def find():
+    return render_template("find.html")
+
 # @app.route("/register", methods=["POST"])
 # def register():
 #     form = request.form.to_dict()

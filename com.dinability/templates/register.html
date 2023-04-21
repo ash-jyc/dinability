@@ -57,36 +57,6 @@
                     </form>
                 </div>
 
-                <script>
-                    var name = document.getElementById("name").value;
-                    var email = document.getElementById("email").value;
-                    var password = document.getElementById("psw").value;
-
-                    // Create a JSON object with the user's email, username, and password
-                    var data = { "username": name, "email": email, "password": password };
-
-                    // Send a POST request to the API endpoint with the JSON data
-                    fetch('/register', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            // Redirect the user to their profile page
-                            window.location.href = '/login';
-                        } else {
-                            // Display an error message to the user
-                            alert('Invalid credentials. Please try again.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                </script>
-
                 <div class="login-group">
                     <p class="suggest-text">Already have an account?</p>
                         <button type="button" class="btn-cancel" onclick="location.href='./loginPage.html'"> Login</button>

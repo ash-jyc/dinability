@@ -76,6 +76,18 @@ class User_Resource(Resource):
             abort(400, 'Operation Failed!')
         return jsonify({'message':'OK'})
         
+# class Recommendation_Resource(Resource):
+#     def get(self):
+#         args = request.args
+#         schema = Schemas.User_Schema(only={'username'})
+#         errors = schema.validate(args)
+#         if errors:
+#             abort(400, str(errors))
+#         result = Models.User.query.filter_by(username=args['username']).first_or_404()
+#         schema = Schemas.User_Schema(only={'id','username','email','rating'})
+#         result = schema.dump(result)
+#         return jsonify(result)
+
 
 api.add_resource(User_Resource, '/user')
 
@@ -83,8 +95,22 @@ api.add_resource(User_Resource, '/user')
 def index():
     return render_template("index.html")
 
-@app.route("/register")
+@app.route("/register", methods=['GET','POST'])
 def register():
+    print('here')
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user = Models.User(username=username, password=password, email=email)
+        db.session.add(user)
+        try:
+            db.session.commit()
+        except exc.SQLAlchemyError:
+            db.session.rollback()
+            flash ('User or email already exists! Try again!')
+        else:
+            return redirect(url_for('profile'))
     return render_template("register.html")
 
 @app.route("/login", methods=['GET','POST'])

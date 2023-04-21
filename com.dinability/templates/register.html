@@ -14,27 +14,7 @@
                       {% endfor %}
                 {% endif %}
            {% endwith %}
-            <div class = "login-group2">
-                <div class="login-group1">
-                    <img class="nyush-dining-logo" src="/static/img/NYUSHdiningLogo.svg" alt="NYUSHDiningLogo" />
-                    <h1 class="title-login">DINENYUSH</h1>
-                </div>
-                <div class="login-group">
-                    <form method="POST" class="form-container" action="/register">
-                        <div class="input-box">
-                            <input type="text" id="name" name="username" placeholder="Your name...">
-                        </div>
-                        <div class="input-box">
-                            <input type="text" id="email" name="email" placeholder="Your email...">
-                        </div>
-                        <div class="input-box">
-                            <input type="text" id="psw" name="password" placeholder="Your password...">
-                        </div>
-                        <div class="button-submit">
-                            <input type="submit" value="Register">
-                        </div>
-                    </form>
-                </div>
+            
             <div class = "login-group2">
                 <div class="login-group1">
                     <img class="nyush-dining-logo" src="/static/img/NYUSHdiningLogo.svg" alt="NYUSHDiningLogo" />
@@ -59,7 +39,7 @@
 
                 <div class="login-group">
                     <p class="suggest-text">Already have an account?</p>
-                        <button type="button" class="btn-cancel" onclick="location.href='./loginPage.html'"> Login</button>
+                        <button type="button" class="btn-cancel" onclick="location.href='/login'"> Login</button>
                     
                     
                 </div>

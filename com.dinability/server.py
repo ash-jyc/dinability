@@ -128,6 +128,12 @@ def login():
             flash('Wrong email or password! Try again!')
     return render_template("login.html")
 
+@app.route("/logout", methods=['GET'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
 @app.route("/profile")
 @login_required
 def profile():

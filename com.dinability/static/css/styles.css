@@ -430,6 +430,14 @@ outline: none;
     top:25%;
 }
 
+.find-card-placeholder{
+    position: absolute;
+    fill: #5D69A7 !important;
+    right: 25px;
+    top: 20px;
+    min-width: 50px;
+    max-width: 135px;
+}
 
 .group-card{
     position:relative;
@@ -450,3 +458,4 @@ outline: none;
     left: 80px;
     top: 40px;
 }
+

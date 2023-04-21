@@ -9,24 +9,27 @@
     </head>
     <body>
         <div class = "homepage-group2">
-
+            <!--display name of user if logged in-->
+            <a href="./logout">Logout</div>
+            <!--logout button-->
             <div class="page-nyush-logo">
                 <img src="/static/img/dine-nyush-logo.png" alt="NYUSHDiningLogo" />
             </div>
-
             <img class="fork" src="/static/img/fork.svg" alt="fork"/>
             <div class="plate">
                 <img src="/static/img/plate.svg" alt="plate"/>
                 <div class="home-button-group">
-                    <button type="button" class="button-thirdly" onclick="location.href='/find'">Find Restaurant</button>
-                    <button type="button" class="button-primary" onclick="location.href='/groups'">Order Group</button>
-                    <button type="button" class="button-primary" onclick="location.href='/profile'">Profile </button>
+                    <button type="button" class="button-thirdly" onclick="location.href='./find.html'">Find Restaurant</button>
+                    <button type="button" class="button-primary" onclick="location.href='./groups'">Order Group</button>
+                    <button type="button" class="button-primary" onclick="location.href='./profile'">Profile</button>
+                    <form class="logout" action="/logout.html">
+                        <button type="logout" class="button-secondary">Logout</button>
+                    </form>
                 </div>
             </div> 
 
             <img class="spoon" src="/static/img/spoon.svg" alt="spoon"/>     
 
-        </div>
         </div>
     </body>
 </html>

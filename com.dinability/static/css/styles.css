@@ -366,8 +366,7 @@ outline: none;
     left: 0;
     bottom: 0;
     right: 0;
-    /* overflow: auto; */
-
+    overflow: scroll;
 }
 
 .find-restaurant-group2{
@@ -421,10 +420,11 @@ outline: none;
 
 
 .bottom-tabs{
-    position: absolute;
+    position: fixed;
     bottom: -10px;
     left:-13px;
     width: 600px;
+    z-index: 100;
 
 }
 
@@ -441,6 +441,20 @@ outline: none;
     top: 20px;
     min-width: 50px;
     max-width: 135px;
+}
+
+.find-restaurant-name {
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    top: -150px;
+    left: 160px;
+    z-index: 100;
+}
+
+.find-block {
+    position: relative;
+    /*float:right;*/
+    z-index: 10;
 }
 
 .group-card{

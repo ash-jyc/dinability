@@ -1,10 +1,11 @@
 import Models
 import Schemas
 from Models import app, db
+from RecommendationAdapter import RecommendationAdapter_for_Ranking, RecommendationAdapter_for_Similarity
 from flask_restful import Resource, Api
 from flask import jsonify, abort, request, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from sqlalchemy import exc
+from sqlalchemy import exc, and_, select
 
 api = Api(app)
 
@@ -76,20 +77,35 @@ class User_Resource(Resource):
             abort(400, 'Operation Failed!')
         return jsonify({'message':'OK'})
         
-# class Recommendation_Resource(Resource):
-#     def get(self):
-#         args = request.args
-#         schema = Schemas.User_Schema(only={'username'})
-#         errors = schema.validate(args)
-#         if errors:
-#             abort(400, str(errors))
-#         result = Models.User.query.filter_by(username=args['username']).first_or_404()
-#         schema = Schemas.User_Schema(only={'id','username','email','rating'})
-#         result = schema.dump(result)
-#         return jsonify(result)
+class Recommendation_Resource(Resource):
+    def get(self):
+        username = request.args['username']
+        method = request.args['method']
+        start_time = request.args['start_time']
+        end_time = request.args['end_time']
+        
+        result = Models.User.query.filter_by(username=username).first_or_404()
+        userid = result.id
+        reviews = db.session.execute(select(Models.Review_on_Restaurant).where(
+                (Models.Review_on_Restaurant.time >= start_time) &
+                (Models.Review_on_Restaurant.time <= end_time) &
+                (Models.Review_on_Restaurant.user_id == userid)
+            )).all()
+        restaurants = db.session.execute(select(Models.Restaurant))
+
+        if method == 'ranking':
+            recommendation_adapter = RecommendationAdapter_for_Ranking()
+        else:
+            recommendation_adapter = RecommendationAdapter_for_Similarity()
+        
+        # Todo
+        
+
+        return jsonify(result)
 
 
 api.add_resource(User_Resource, '/user')
+api.add_resource(Recommendation_Resource, '/recommendation')
 
 @app.route("/")
 @login_required

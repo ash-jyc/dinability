@@ -12,6 +12,10 @@ body {
     overflow: hidden;
     font-family:'Montserrat',sans-serif;
 }
+
+img {
+    z-index: -1;
+}
 .topnav {
     background-color: #333;
     overflow: hidden;
@@ -464,5 +468,10 @@ outline: none;
     float: right;
     width: 100px;
     border-radius: 0;
-    height=
+}
+
+.bottom-tab-find {
+    position: relative;
+    float:right;
+    padding: 30px;
 }

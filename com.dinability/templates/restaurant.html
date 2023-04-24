@@ -31,6 +31,21 @@
             <img class="nyush-logo-restaurant" src="/static/img/NYUSHdiningLogo_rate.svg" alt="NYUSHDiningLogo" />
         </div>
         
+        <!--import image-->
+        <input id="upload" type="file" onChange="handleImageUpload()" />
+        <img id="display-image" src="" />
+
+        <script>
+            function handleImageUpload() {
+                var image = document.getElementById("upload").files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("display-image").src = e.target.result;
+                }
+                reader.readAsDataURL(image);
+                
+            } 
+        </script>
         
     </div>
     

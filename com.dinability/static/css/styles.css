@@ -9,7 +9,7 @@ body {
     padding: 0px;  
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
     font-family:'Montserrat',sans-serif;
 }
 
@@ -149,7 +149,6 @@ button:hover {
 }
 .login-group1{
     padding: 5px;
-
     position: relative;
     /* height: 258px;
     width: 297px; */ 
@@ -165,6 +164,7 @@ button:hover {
     /* min-height: 380px; */
     padding: 60px;
     min-width: 328px;
+
 }
 
 
@@ -366,7 +366,7 @@ outline: none;
     left: 0;
     bottom: 0;
     right: 0;
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 
 .find-restaurant-group2{

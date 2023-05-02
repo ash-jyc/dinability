@@ -360,13 +360,13 @@ outline: none;
 
 /* find restaurant */
 .find-restaurant-group{
-    background-color:#D3D2E2;
+    /*background-color:#D3D2E2;*/
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    /*overflow: scroll;*/
+    overflow: scroll;
 }
 
 .find-restaurant-group2{
@@ -437,17 +437,18 @@ outline: none;
 .find-card-placeholder{
     position: absolute;
     fill: #5D69A7 !important;
-    right: 25px;
-    top: 20px;
+    left: 40px;
+    top: 35px;
     min-width: 50px;
-    max-width: 135px;
+    max-width: 120px;
+    z-index: 120;
 }
 
 .find-restaurant-name {
     font-family: 'Courier New', Courier, monospace;
     position: relative;
     top: -150px;
-    left: 160px;
+    left: 200px;
     z-index: 100;
 }
 
@@ -550,3 +551,10 @@ outline: none;
   
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
+
+  /* RESTAURANT BUTTONS */
+  .btn-styled {
+    margin: 8px;
+    padding: 0 10px;
+    line-height: 2;
+  }

@@ -29,13 +29,13 @@
         <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn">Sort by</button>
             <div id="myDropdown" class="dropdown-content">
-              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-              <a href="#recommended">Recommended</a>
-              <a href="#popular">Popular</a>
-              <a href="#rating">Rating</a>
-              <a href="#price">Price</a>
-              <a href="#time">Delivery Time</a>
-              <a href="#deals">Deals</a>
+                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                <a href="#recommended">Recommended</a>
+                <a href="#popular">Popular</a>
+                <a href="#rating">Rating</a>
+                <a href="#price">Price</a>
+                <a href="#time">Delivery Time</a>
+                <a href="#deals">Deals</a>
             </div>
         </div>
 
@@ -67,26 +67,35 @@
             
             
             <!--find card should have information of a restaurant on it-->
-            <div class="bottom_tab_find" onclick="location.href='/find'">
-                <img src="/static/img/card_find_restaurant.svg" alt="find_bottom_tab" class="find-block" />
-                <div class="find-restaurant-name">restaurant 1</div>
-            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
 
-            <div class="bottom_tab_find" onclick="location.href='/find'">
-                <img src="/static/img/card_find_restaurant.svg" alt="find_bottom_tab" class="find-block" />
-                <div class="find-restaurant-name">restaurant 2</div>
-            </div>
+                    for (let i=0; i<5; i++){
+                        var button = document.createElement('img');
+                        button.setAttribute("src", "/static/img/card_find_restaurant.svg");
+                        //button.type = 'button';
+                        //button.innerHTML = 'Press me';
+                        //button.className = 'btn-styled';
+                        var text = document.createElement("p");
+                        text.className = "find-restaurant-name";
+                        text.innerHTML = "restaurant " + String(i)
+                        var image = document.createElement("img");
+                        image.setAttribute("src", "/static/img/NYUSHdiningLogo.svg");
+                        image.className = "find-card-placeholder";
+                        var container = document.getElementById('container');
+                        container.appendChild(button);
+                        container.appendChild(text);
+                        container.appendChild(image);
+                    }
 
-            <div class="bottom_tab_find" onclick="location.href='/find'">
-                <img src="/static/img/card_find_restaurant.svg" alt="find_bottom_tab" class="find-block" />
-                <div class="find-restaurant-name">restaurant 3</div>
-            </div>
-            
-            <!--should redirect to individual restaurant page-->
-            <img class="find-card-placeholder" src="/static/img/NYUSHdiningLogo.svg" alt="card-placeholder" />
+                    
+                }, false);
+            </script>
+            <div id="container"></div>
+
         </div>
        
-        <div >   
+        <div>   
             <img class="nyush-logo-restaurant" src="/static/img/NYUSHdiningLogo_find.svg" alt="NYUSHDiningLogo" />
         </div>
         

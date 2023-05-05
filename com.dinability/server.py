@@ -9,6 +9,7 @@ from flask import jsonify, abort, request, render_template, redirect, url_for, f
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from sqlalchemy import exc, select
 import pandas as pd
+import numpy as np
 
 api = Api(app)
 
@@ -82,7 +83,7 @@ class User_Resource(Resource):
         
 class Recommendation_Resource(Resource):
     def get(self):
-        data = request.get_json
+        data = request.get_json()
         username = data['username']
         method = data['method']
         param = data['param']
@@ -90,20 +91,23 @@ class Recommendation_Resource(Resource):
         result = Models.User.query.filter_by(username=username).first_or_404()
         userid = result.id
         restaurants = db.session.query(Models.Restaurant).all()
+
         restaurants_df = pd.DataFrame([(r.restaurant_name, r.picture_uri, r.description, r.rating_aspect_1,
                 r.rating_aspect_2, r.rating_aspect_3, r.rating_aspect_4, r.rating_aspect_5) for r in restaurants],
                 columns=['restaurant_name', 'picture_uri', 'description', 'rating_aspect_1', 'rating_aspect_2',
                 'rating_aspect_3', 'rating_aspect_4', 'rating_aspect_5'])
+        restaurants_df = restaurants_df.fillna(np.nan)
         restaurants_df = rating_aggregate(restaurants_df)
         reviews = db.session.query(Models.Review_on_Restaurant).all()
         reviews_df = pd.DataFrame([(r.user_id, r.restaurant_name, r.time, r.rating_aspect_1,
                 r.rating_aspect_2, r.rating_aspect_3, r.rating_aspect_4, r.rating_aspect_5) for r in reviews],
                 columns=['user_id', 'restaurant_name', 'time', 'rating_aspect_1', 'rating_aspect_2',
                 'rating_aspect_3', 'rating_aspect_4', 'rating_aspect_5'])
+        reviews_df = reviews_df.fillna(np.nan)
         reviews_df = rating_aggregate(reviews_df)
 
         if method == 'Ranking':
-            rec_engine = Ranking(restaurants_df, 'param')
+            rec_engine = Ranking(restaurants_df, param)
             result = rec_engine.topk()
         elif method == 'Similarity':
             if param == 'Cosine':

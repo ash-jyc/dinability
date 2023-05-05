@@ -34,7 +34,7 @@ class Ranking:
         self.on = on
 
     def topk(self, k=5):
-        candidate_df = self.rating_data.sort_values(by=self.on, assending=False).head(k)
+        candidate_df = self.rating_data.sort_values(by=self.on, ascending=False).head(k)
         return candidate_df
 
 

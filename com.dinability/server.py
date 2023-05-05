@@ -188,7 +188,7 @@ def find():
 @login_required
 def restaurant(restaurant_name):
     restaurant = Models.Restaurant.query.filter_by(restaurant_name=restaurant_name).first_or_404()
-    return render_template("find.html", restaurant=restaurant)
+    return render_template("restaurant.html", restaurant=restaurant)
 
 # @app.route("/register", methods=["POST"])
 # def register():

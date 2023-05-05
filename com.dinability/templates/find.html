@@ -59,18 +59,31 @@
             <script>
                 
                 const myRequest = new Request('/recommendation', {
+                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
                     method: 'POST',
-                    body: '{"username": "test1", "method": "Ranking", "param": "rating"}',
+                    body: JSON.stringify({"username": "test1", "method": "Ranking", "param": "rating"})
                 })
-                var obj
+                //var obj
                 fetch(myRequest)
-                    .then(res=>res.json())
-                    .then(data => {
-                        obj = data;
-                    })
-                    .then(() => {
-                        console.log(obj);
-                    });
+                    // .then(function(res) {
+                    //     responseClone = res.clone();
+                    //     return res.json()
+                    // })
+                    // .then(data => {
+                    //     obj = data;
+                    // })
+                    // .then(() => {
+                    //     console.log(obj);
+                    // });
+                    .then(function(res){ console.log(res) })
+                    .catch(function(res){ console.log(res) })
+                    // .then((response) => {
+                    // if (response.status === 200) {
+                    // return response.json();
+                    // } else {
+                    // throw new Error("Something went wrong on API server!");
+                    // }
+                    // })
                 // document.addEventListener('DOMContentLoaded', function() {
 
                 //     for (let i=0; i<5; i++){

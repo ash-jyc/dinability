@@ -130,6 +130,15 @@ class Review_on_Food(db.Model):
     def __repr__(self):
         return '<Review_on_Restaurant %r %r>' % (str(self.user_id), str(self.time))
 
+class Message(db.Model):
+    __tablename__ = 'message'
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, primary_key=True)
+    sendee_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, primary_key=True)
+    group_id = db.Column(db.Integer, db.ForeignKey('group.group_id'), nullable=False, primary_key=True)
+    content = db.Column(db.String(50))
+    def __repr__(self):
+        return '<Message %r %r %r>' % (str(self.sender_id), str(self.sendee_id), str(self.group_id))
+
 
 if __name__ == '__main__':
     with app.app_context():

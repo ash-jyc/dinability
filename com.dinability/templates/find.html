@@ -37,7 +37,8 @@
             <!--find card should have information of a restaurant on it-->
             <script>
                 
-                const myRequest = new Request('/recommendation', {method: 'GET', body: '{"username": "{{username}}", "method": "Ranking", "param": "rating"}',})
+                const myRequest = new Request('/recommendation', {method: 'GET', 
+                body: '{"username": "{{username}}", "method": "Ranking", "param": "rating"}',})
 
                 document.addEventListener('DOMContentLoaded', function() {
 

@@ -184,6 +184,12 @@ def rate():
 def find():
     return render_template("find.html")
 
+@app.route("/restaurant/<string:restaurant_name>")
+@login_required
+def restaurant(restaurant_name):
+    restaurant = Models.Restaurant.query.filter_by(restaurant_name=restaurant_name).first_or_404()
+    return render_template("find.html", restaurant=restaurant)
+
 # @app.route("/register", methods=["POST"])
 # def register():
 #     form = request.form.to_dict()

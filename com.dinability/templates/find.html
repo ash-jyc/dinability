@@ -37,9 +37,18 @@
             <!--find card should have information of a restaurant on it-->
             <script>
                 
-                const myRequest = new Request('/recommendation', {method: 'GET', 
-                body: '{"username": "{{username}}", "method": "Ranking", "param": "rating"}',})
-
+                const myRequest = new Request('/recommendation', {method: 'GET', body: '{"username": "{{username}}", "method": "Ranking", "param": "rating"}',})
+                fetch(myRequest)
+                    .then((response) => {
+                        if (response.status === 200) {
+                            return response.json();
+                        } else {
+                            throw new Error("Something went wrong on API server!");
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
                 document.addEventListener('DOMContentLoaded', function() {
 
                     for (let i=0; i<5; i++){
@@ -50,7 +59,7 @@
                         //button.className = 'btn-styled';
                         var text = document.createElement("p");
                         text.className = "find-restaurant-name";
-                        //text.innerHTML = myRequest[i]['name'] + String(i)
+                        text.innerHTML = myRequest[i]['name'] + String(i)
                         var image = document.createElement("img");
                         image.setAttribute("src", "/static/img/NYUSHdiningLogo.svg");
                         image.className = "find-card-placeholder";

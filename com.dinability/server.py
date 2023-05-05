@@ -82,7 +82,7 @@ class User_Resource(Resource):
         return jsonify({'message':'OK'})
         
 class Recommendation_Resource(Resource):
-    def get(self):
+    def post(self):
         data = request.get_json()
         username = data['username']
         method = data['method']

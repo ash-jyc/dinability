@@ -182,7 +182,7 @@ def rate():
 @app.route("/find")
 @login_required
 def find():
-    return render_template("find.html")
+    return render_template("find.html", username=current_user.username)
 
 @app.route("/restaurant/<string:restaurant_name>")
 @login_required

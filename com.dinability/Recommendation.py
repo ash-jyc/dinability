@@ -29,12 +29,12 @@ class Recommendation:
         return candidate_df
 
 class Ranking:
-    def __init__(self, item_data, on):
-        self.rating_data = item_data
+    def __init__(self, item_data, on, rating_data=None):
+        self.item_data = item_data
         self.on = on
 
     def topk(self, k=5):
-        candidate_df = self.rating_data.sort_values(by=self.on, ascending=False).head(k)
+        candidate_df = self.item_data.sort_values(by=self.on, ascending=False).head(k)
         return candidate_df
 
 

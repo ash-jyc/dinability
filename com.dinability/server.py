@@ -1,7 +1,7 @@
 import Models
 import Schemas
 from Models import app, db
-from utils import rating_aggregate
+from utils import rating_aggregate, pop_aggregate
 from Recommendation import Recommendation, Ranking
 from RecommendationStrategy import Pearson, Jaccard, Cosine
 from flask_restful import Resource, Api
@@ -88,8 +88,8 @@ class Recommendation_Resource(Resource):
         method = data['method']
         param = data['param']
 
-        result = Models.User.query.filter_by(username=username).first_or_404()
-        userid = result.id
+        users = Models.User.query.filter_by(username=username).first_or_404()
+        userid = users.id
         restaurants = db.session.query(Models.Restaurant).all()
 
         restaurants_df = pd.DataFrame([(r.restaurant_name, r.picture_uri, r.description, r.rating_aspect_1,
@@ -105,6 +105,7 @@ class Recommendation_Resource(Resource):
                 'rating_aspect_3', 'rating_aspect_4', 'rating_aspect_5'])
         reviews_df = reviews_df.fillna(np.nan)
         reviews_df = rating_aggregate(reviews_df)
+        restaurants_df = pop_aggregate(restaurants_df, reviews_df)
 
         if method == 'Ranking':
             rec_engine = Ranking(restaurants_df, param)

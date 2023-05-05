@@ -2,7 +2,7 @@ from RecommendationStrategy import Pearson, Jaccard, Cosine
 import numpy as np
 import pandas as pd
 
-class Recommendation():
+class Recommendation:
     def __init__(self, rating_data, item_data, user_col, item_col, rating_col, recommendation_strategy):
         self.rating_data = rating_data
         self.item_data = item_data
@@ -26,6 +26,15 @@ class Recommendation():
         candidate_df = self.item_data[~self.item_data[self.item_col].isin(drop_df)]
         candidate_df.loc[:,'Predict-score'] = candidate_df[self.item_col].apply(lambda m: self.rating_predict(user, m))
         candidate_df = candidate_df.sort_values(by='Predict-score',ascending=False).head(k)
+        return candidate_df
+
+class Ranking:
+    def __init__(self, item_data, on):
+        self.rating_data = item_data
+        self.on = on
+
+    def topk(self, k=5):
+        candidate_df = self.rating_data.sort_values(by=self.on, assending=False).head(k)
         return candidate_df
 
 

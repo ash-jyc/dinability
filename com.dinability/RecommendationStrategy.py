@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-class RecommendationStrategy():
+class RecommendationStrategy:
     def __init__(self, rating_data, user_col, item_col, rating_col):
         self.rating_data = rating_data
         self.user_col = user_col

@@ -2,51 +2,25 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./styles.css" rel="stylesheet" />
+    <title>{{restaurant.restaurant_name}}</title>
 </head>
 
 <body>
-    <div class = "find-restaurant-group">
-        
-        <div class="small-plate">
-            <img src="/static/img/small-plate-rate.svg" alt="small-plate-rate"/>
-            <img src="/static/img/small-plate-rate.svg" alt="small-plate-rate"/>
-            <h1 class="find-title">Rate!</h1>
-        </div> 
-        
-        <div class="bottom-tabs">
-            <a href="./find.html" class="bottom_tab"><img src="/static/img/bottom_tab.svg" alt="find_bottom_tab"></a>
-            <a href="./groups.html" class="bottom_tab"><img src="/static/img/group_bottom_tab.svg" alt="group_bottom_tab"></a>
-        </div>
-      
-        <div>
-            <img class="nyush-logo-restaurant" src="/static/img/NYUSHdiningLogo.svg" alt="NYUSHDiningLogo" />
-            <img class="fork-page" src="/static/img/fork_rate.svg" alt="fork_page"/>          
-            <img class="spoon-page" src="/static/img/spoon_rate.svg" alt="spoon_page"/>     
-        </div>
-        
-        <div class="find-card">
-            <a href="./find.html" class="bottom_tab_find"><img src="/static/img/card_rate_restaurant.svg" alt="find_bottom_tab"></a>
-        </div>
-        <div >   
-            <img class="nyush-logo-restaurant" src="/static/img/NYUSHdiningLogo_rate.svg" alt="NYUSHDiningLogo" />
-        </div>
-        
-        <!--import image-->
-        <input id="upload" type="file" onChange="handleImageUpload()" />
-        <img id="display-image" src="" />
-
-        <script>
-            function handleImageUpload() {
-                var image = document.getElementById("upload").files[0];
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById("display-image").src = e.target.result;
-                }
-                reader.readAsDataURL(image);
-                
-            } 
-        </script>
-        
-    </div>
+    <h1>{{restaurant.restaurant_name}}</h1>
     
+    <input id="upload" type="file" onChange="handleImageUpload()" />
+    <img id="display-image" src="" />
+
+    <script>
+        function handleImageUpload() {
+            var image = document.getElementById("upload").files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("display-image").src = e.target.result;
+            }
+            reader.readAsDataURL(image);
+            
+        } 
+    </script>
+            
 </body>

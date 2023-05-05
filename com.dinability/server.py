@@ -1,11 +1,13 @@
 import Models
 import Schemas
 from Models import app, db
-from RecommendationAdapter import RecommendationAdapter_for_Ranking, RecommendationAdapter_for_Similarity
+from utils import rating_aggregate
+# from RecommendationAdapter import RecommendationAdapter_for_Ranking, RecommendationAdapter_for_Similarity
 from flask_restful import Resource, Api
 from flask import jsonify, abort, request, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from sqlalchemy import exc, and_, select
+from sqlalchemy import exc, select
+import pandas as pd
 
 api = Api(app)
 
@@ -81,22 +83,26 @@ class Recommendation_Resource(Resource):
     def get(self):
         username = request.args['username']
         method = request.args['method']
-        start_time = request.args['start_time']
-        end_time = request.args['end_time']
         
         result = Models.User.query.filter_by(username=username).first_or_404()
         userid = result.id
-        reviews = db.session.execute(select(Models.Review_on_Restaurant).where(
-                (Models.Review_on_Restaurant.time >= start_time) &
-                (Models.Review_on_Restaurant.time <= end_time) &
-                (Models.Review_on_Restaurant.user_id == userid)
-            )).all()
-        restaurants = db.session.execute(select(Models.Restaurant))
+        restaurants = db.session.query(Models.Restaurant).all()
+        restaurants_df = pd.DataFrame([(r.restaurant_name, r.picture_uri, r.description, r.rating_aspect_1,
+                r.rating_aspect_2, r.rating_aspect_3, r.rating_aspect_4, r.rating_aspect_5) for r in restaurants],
+                columns=['restaurant_name', 'picture_uri', 'description', 'rating_aspect_1', 'rating_aspect_2',
+                'rating_aspect_3', 'rating_aspect_4', 'rating_aspect_5'])
+        reviews = db.session.query(Models.Review_on_Restaurant).all()
+        reviews_df = pd.DataFrame([(r.user_id, r.restaurant_name, r.time, r.rating_aspect_1,
+                r.rating_aspect_2, r.rating_aspect_3, r.rating_aspect_4, r.rating_aspect_5) for r in reviews],
+                columns=['user_id', 'restaurant_name', 'time', 'rating_aspect_1', 'rating_aspect_2',
+                'rating_aspect_3', 'rating_aspect_4', 'rating_aspect_5'])
+        reviews_df = rating_aggregate(reviews_df)
 
-        if method == 'ranking':
-            recommendation_adapter = RecommendationAdapter_for_Ranking()
-        else:
-            recommendation_adapter = RecommendationAdapter_for_Similarity()
+
+        # if method == 'ranking':
+        #     recommendation_adapter = RecommendationAdapter_for_Ranking()
+        # else:
+        #     recommendation_adapter = RecommendationAdapter_for_Similarity()
         
         # Todo
         

@@ -82,10 +82,11 @@ class User_Resource(Resource):
         
 class Recommendation_Resource(Resource):
     def get(self):
-        username = request.args['username']
-        method = request.args['method']
-        param = request.args['param']
-        
+        data = request.get_json
+        username = data['username']
+        method = data['method']
+        param = data['param']
+
         result = Models.User.query.filter_by(username=username).first_or_404()
         userid = result.id
         restaurants = db.session.query(Models.Restaurant).all()

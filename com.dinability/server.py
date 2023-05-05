@@ -93,6 +93,7 @@ class Recommendation_Resource(Resource):
                 r.rating_aspect_2, r.rating_aspect_3, r.rating_aspect_4, r.rating_aspect_5) for r in restaurants],
                 columns=['restaurant_name', 'picture_uri', 'description', 'rating_aspect_1', 'rating_aspect_2',
                 'rating_aspect_3', 'rating_aspect_4', 'rating_aspect_5'])
+        restaurants_df = rating_aggregate(restaurants_df)
         reviews = db.session.query(Models.Review_on_Restaurant).all()
         reviews_df = pd.DataFrame([(r.user_id, r.restaurant_name, r.time, r.rating_aspect_1,
                 r.rating_aspect_2, r.rating_aspect_3, r.rating_aspect_4, r.rating_aspect_5) for r in reviews],

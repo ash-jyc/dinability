@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./styles.css" rel="stylesheet" />
+    <link href="/static/css/styles.css" rel="stylesheet" />
     <title>{{restaurant.restaurant_name}}</title>
 </head>
 
 <body>
-    <h1>{{restaurant.restaurant_name}}</h1>
+    <div class="container">   
+        <h1>{{restaurant.restaurant_name}}</h1>
+    </div>
     
+    <!--display stuff-->
+    <img src={{restaurant.picture_uri}} />
+    <p>{{restaurant.description}}</p>
     <input id="upload" type="file" onChange="handleImageUpload()" />
     <img id="display-image" src="" />
 
@@ -16,11 +21,22 @@
             var image = document.getElementById("upload").files[0];
             var reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById("display-image").src = e.target.result;
+                var dataUri = e.target.result,
+                img = document.getElementById("display-image");
+                img.src = dataUri;
+                //send uri to backend
+                fetch('/restaurant', method="POST", body='{"uri": dataUri}',)
+                .then(response=>response.text())
             }
             reader.readAsDataURL(image);
             
-        } 
+        }
+        //https://stackoverflow.com/questions/13373834/upload-image-using-javascript
+    </script>
+
+    <!--chat-->
+    <script>
+
     </script>
             
 </body>

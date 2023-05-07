@@ -1,18 +1,22 @@
 <!DOCTYPE html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/css/styles.css" rel="stylesheet" />
     <title>{{restaurant.restaurant_name}}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
 </head>
 
 <body>
-    <div class="container">   
+    <div class="container">
         <h1>{{restaurant.restaurant_name}}</h1>
     </div>
-    
+
     <!--display stuff-->
     <img src={{restaurant.picture_uri}} />
     <p>{{restaurant.description}}</p>
+    <div id="messages"></div>
     <input id="upload" type="file" onChange="handleImageUpload()" />
     <img id="display-image" src="" />
 
@@ -20,23 +24,251 @@
         function handleImageUpload() {
             var image = document.getElementById("upload").files[0];
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 var dataUri = e.target.result,
-                img = document.getElementById("display-image");
+                    img = document.getElementById("display-image");
                 img.src = dataUri;
                 //send uri to backend
-                fetch('/restaurant', method="POST", body='{"uri": dataUri}',)
-                .then(response=>response.text())
+                fetch('/restaurant', method = "POST", body = '{"uri": dataUri}',)
+                    .then(response => response.text())
             }
             reader.readAsDataURL(image);
-            
+
         }
         //https://stackoverflow.com/questions/13373834/upload-image-using-javascript
     </script>
 
     <!--chat-->
-    <script>
+    <script type="text/javascript">
+        /*$(document).ready(function() {
+            var socket = io.connect("http://localhost:5000");
+            socket.on('connect', function() {
+                socket.send("User connected");
+            });
+            socket.on('message', function(data) {
+                $('#messages').append($('<p>')).text(data)
+            });
+            $('sendBtn').on('click', function() {
+                socket.send($('username').val() + ': ' +  ($('#message').val()));
+                $('#message').val('');
+            });
+
+        });*/
+
+        var socket = io();
+        const messages_container = document.getElementById('chat_box');
+
+        $(document).ready(function () {
+
+            // if user fails to connect, users will still be seeing please refresh the page message.
+            socket.on('connect', function () {
+                let output =
+                    '<div class="text-center mt-2">' +
+                    '<p>No group selected.</p >' +
+                    '</div>';
+                $('#chat_box').html(output);
+            });
+
+            // this will handle the message after connecting to the server
+            // updating the groups
+            socket.on('message', function (message) {
+                let data = message;
+                $('#total_users').text('Total number of users in the server: ' + data['total_users']);
+                if (data['groups'].length > 0) {
+                    let output = "";
+                    for (let i = 0; i < data['groups'].length; i++) {
+                        output +=
+                            '<div class="card my-2">' +
+                            '<div class="card-body clearfix"> ' +
+                            '<div class="float-left">' + data['groups'][i]['group_name'] + '</div>' +
+                            '<div class="float-right">' +
+                            '<button type="button" class="btn btn-primary" onclick=join_group(' + data['groups'][i]['group_id'] + ') data-dismiss="modal">Join group</button>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                    $('#groups').html(output);
+                } else {
+                    let output = '<div class="text-center mt-5">' + 'No groups at the moment.' + '</div>';
+                    $('#groups').html(output);
+                }
+            });
+
+            // Sends "someone in this group disconnects" message to chat group the user joined
+            socket.on('disconnect', function (message) {
+                $('#total_users').text('Total number of users in the server: ' + message);
+                let logout_message = '<li>' +
+                    '<div class="d-flex justify-content-center mb-3">' +
+                    '<div class="w-75 border border-dark rounded-lg p-2">Someone in this group disconnects.</div>' +
+                    '</div>' +
+                    '</li>';
+                $('#messages').append(logout_message);
+            });
+
+            // loads group messages when use joined a group
+            socket.on('load_messages', function (message) {
+                console.log(message);
+                let saved_messages = "";
+                for (let i = 0; i < message['messages'].length; i++) {
+                    saved_messages +=
+                        '<li>' +
+                        '<div class="d-flex justify-content-start mb-3">' +
+                        '<div class="w-75 border border-danger rounded-lg p-2">' +
+                        '<strong>' + message['messages'][i]['sender'] + '</strong><br>' +
+                        message['messages'][i]['message'] +
+                        '</div>' +
+                        '</div>' +
+                        '</li>';
+                }
+                $('#messages').append(saved_messages);
+                $('#selected_group_name').text(message['group_name']);
+            });
+
+            // Sends a "user joined message" to group when user joined
+            socket.on('joined', function (message) {
+                let join_message =
+                    '<li>' +
+                    '<div class="d-flex justify-content-center mb-3">' +
+                    '<div class="w-75 border border-success rounded-lg p-2">' + message + '</div>' +
+                    '</div>' +
+                    '</li>';
+                $('#messages').append(join_message);
+            });
+
+            // Sends a "user left message" to chat group when user leave the group
+            socket.on('leave', function (message) {
+                let output =
+                    '<li>' +
+                    '<div class="d-flex justify-content-center mb-3">' +
+                    '<div class="w-75 border border-dark rounded-lg p-2">' + message + '</div>' +
+                    '</div>' +
+                    '</li>';
+                $('#messages').append(output);
+            });
+
+            // Sends "someone disconnects" to chat group
+            socket.on('logout', function (message) {
+                let output =
+                    '<li>' +
+                    '<div class="d-flex justify-content-center mb-3">' +
+                    '<div class="w-75 border border-dark rounded-lg p-2">' + message + '</div>' +
+                    '</div>' +
+                    '</li>';
+                $('#messages').append(output);
+            });
+
+            // Sends a "user delete the group message" when user a deletes the group
+            socket.on('delete', function (message) {
+                let output =
+                    '<li>' +
+                    '<div class="d-flex justify-content-center mb-3">' +
+                    '<div class="w-75 border border-danger rounded-lg p-2">' +
+                    message +
+                    '</div>' +
+                    '</div>' +
+                    '</li>';
+                $('#messages').append(output);
+            });
+
+            // Sets the current user chat to right while other members on the left
+            socket.on('chat', function (message) {
+                let output;
+                if (message['current_user'] == $('#current_user_id').val()) {
+                    output =
+                        '<li>' +
+                        '<div class="d-flex justify-content-end mb-3">' +
+                        '<div class="w-75 border border-primary rounded-lg p-2">' +
+                        '<strong>You</strong><br>' +
+                        message['message'] +
+                        '</div>' +
+                        '</div>' +
+                        '</li>';
+                } else {
+                    output =
+                        '<li>' +
+                        '<div class="d-flex justify-content-start mb-3">' +
+                        '<div class="w-75 border border-danger rounded-lg p-2">' +
+                        '<strong>' + message['sender'] + '</strong><br>' +
+                        message['message'] +
+                        '</div>' +
+                        '</div>' +
+                        '</li>';
+                }
+                $('#messages').append(output);
+                shouldScroll = messages_container.scrollTop + messages_container.clientHeight === messages_container.scrollHeight;
+                if (!shouldScroll) {
+                    scrollToBottom();
+                }
+            });
+
+            $('#create').click(function () {
+                let group_name = $('#group_name').val();
+                $('#group_name').val('');
+                socket.emit('create', group_name);
+            });
+
+            $('#send').click(function () {
+                let message = $('#send_message').val();
+                let sender = $('#current_user').val();
+                let group = $('#selected_group_name').text();
+                let group_id = $('#current_group_id').val();
+                let user_id = $('#current_user_id').val();
+                $('#send_message').val('');
+                if (message && sender && group && group_id && user_id) {
+                    socket.emit('chat', { 'message_body': message, 'sender': sender, 'group': group, 'group_id': group_id, 'current_user': user_id })
+                }
+            });
+        });
+
+        function scrollToBottom() {
+            messages_container.scrollTop = messages_container.scrollHeight;
+        }
+
+        // user joins a group; adds delete and leave button; add ul tag for messages to append
+        function join_group(group_id) {
+            $('#current_group_id').val(group_id);
+            socket.emit('join_group', { 'username': $('#current_user').val(), 'group_id': group_id });
+            let chatheader =
+                '<div class="border p-2 my-2">' +
+                '<div class="text-center" id="selected_group_name">' +
+                '</div>' +
+                '<div class="text-center mt-2">' +
+                '<button type="button" class="btn btn-warning btn-sm mx-1" onclick=delete_group(' + group_id + ')>Delete</button>' +
+                '<button type="button" class="btn btn-danger btn-sm mx-1" onclick=leave_group(' + group_id + ')>Leave</button>' +
+                '</div>' +
+                '</div>';
+            let chatbox =
+                '<ul style="list-style-type:none;padding: 0;" id="messages" class="mt-3">' +
+                '</ul>';
+            $('#chat_header').html(chatheader);
+            $('#chat_box').html(chatbox);
+            scrollToBottom();
+        }
+
+        function leave_group(group_id) {
+            $('#current_group_id').val('');
+            socket.emit('leave', { 'username': $('#current_user').val(), 'group_id': group_id });
+            let output =
+                '<div class="text-center mt-2">' +
+                '<p>No group selected.</p >' +
+                '</div>';
+            $('#chat_header').html('');
+            $('#chat_box').html(output);
+        }
+
+        function delete_group(group_id) {
+            $('#current_group_id').val('');
+            socket.emit('delete', { 'username': $('#current_user').val(), 'group_id': group_id });
+            let output =
+                '<div class="text-center mt-2">' +
+                '<p>No group selected.</p >' +
+                '</div>';
+            $('#chat_header').html('');
+            $('#chat_box').html(output);
+        }
+
+
 
     </script>
-            
+
 </body>

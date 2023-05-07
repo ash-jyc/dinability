@@ -30,82 +30,46 @@
         
 
         <!--recommendation: user id, method, returns json file. indexed-->
-
         <div class="find-card">
             
             <script>
-                // const myRequest = new Request('/recommendation', {
-                //     method: 'GET',
-                //     body: '{"username": "test1", "method": "Ranking", "param": "rating"}',
-                // })
-
-                // fetch(myRequest)
-                // .then((response)) {
-                //     if (response.status === 200) {
-                //         return response.json();
-                //     } else {
-                //         throw new Error("Something went wrong on API server!");
-                //     }
-                // })
-                // .then((response) => {
-                //     console.debug(response);
-                //     // …
-                // })
-                // .catch((error) => {
-                //     console.error(error);
-                // });
-            </script>
-            <!--find card should have information of a restaurant on it-->
-            <script>
-                
                 const myRequest = new Request('/recommendation', {
-                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-                    method: 'POST',
-                    body: JSON.stringify({"username": "test1", "method": "Ranking", "param": "rating"})
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                method: 'POST',
+                body: JSON.stringify({"username": "test1", "method": "Ranking", "param": "rating"})
                 })
-                //var obj
+
                 fetch(myRequest)
-                    // .then(function(res) {
-                    //     responseClone = res.clone();
-                    //     return res.json()
-                    // })
-                    // .then(data => {
-                    //     obj = data;
-                    // })
-                    // .then(() => {
-                    //     console.log(obj);
-                    // });
-                    .then(function(res){ console.log(res) })
-                    .catch(function(res){ console.log(res) })
-                    // .then((response) => {
-                    // if (response.status === 200) {
-                    // return response.json();
-                    // } else {
-                    // throw new Error("Something went wrong on API server!");
-                    // }
-                    // })
-                // document.addEventListener('DOMContentLoaded', function() {
+                    .then(response => response.json())
+                    .then(data => {
+                        createButtons(data);
+                    });
+                
+                
+                function createButtons(data) {
 
-                //     for (let i=0; i<5; i++){
-                //         var button = document.createElement('img');
-                //         button.setAttribute("src", "/static/img/card_find_restaurant.svg");
-                //         //button.type = 'button';
-                //         //button.innerHTML = 'Press me';
-                //         //button.className = 'btn-styled';
-                //         var text = document.createElement("p");
-                //         text.className = "find-restaurant-name";
-                //         //text.innerHTML = obj.restaurant_name + String(i)
-                //         var image = document.createElement("img");
-                //         image.setAttribute("src", "/static/img/NYUSHdiningLogo.svg");
-                //         image.className = "find-card-placeholder";
-                //         var container = document.getElementById('container');
-                //         container.appendChild(button);
-                //         container.appendChild(text);
-                //         container.appendChild(image);
-                //     }
-
-                    
-                // }, false);
+                    for (var key in data) {
+                        var button = document.createElement('img');
+                        button.setAttribute("src", "/static/img/card_find_restaurant.svg");
+                        //button.type = 'button';
+                        //button.innerHTML = 'Press me';
+                        //button.className = 'btn-styled';
+                        var text = document.createElement("p");
+                        text.className = "find-restaurant-name";
+                        //text.innerHTML = data[String(i)]["restaurant-name"];
+                        //text.innerHTML = data.restaurant_name;
+                        text.innerHTML = data.key.restaurant_name;
+                        var image = document.createElement("img");
+                        image.setAttribute("src", "/static/img/NYUSHdiningLogo.svg");
+                        image.className = "find-card-placeholder";
+                        var container = document.getElementById('container');
+                        container.appendChild(button);
+                        container.appendChild(text);
+                        container.appendChild(image);
+                    }
+                    //}, false);
+                }
+                
             </script>
             <div id="container"></div>
 

@@ -16,7 +16,7 @@
     <!--display stuff-->
     <img src={{restaurant.picture_uri}} />
     <p>{{restaurant.description}}</p>
-    <div id="messages"></div>
+    <div id="chat_box"></div>
     <input id="upload" type="file" onChange="handleImageUpload()" />
     <img id="display-image" src="" />
 
@@ -40,6 +40,7 @@
 
     <!--chat-->
     <script type="text/javascript">
+        //TEST CODE
         /*$(document).ready(function() {
             var socket = io.connect("http://localhost:5000");
             socket.on('connect', function() {

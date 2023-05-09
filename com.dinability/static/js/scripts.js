@@ -78,3 +78,5 @@ function register() {
 const form = document.querySelector('form');
 // form.addEventListener('Login', login());
 form.addEventListener('Register', register());
+
+

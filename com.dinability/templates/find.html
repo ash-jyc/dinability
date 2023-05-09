@@ -45,55 +45,30 @@
                     .then(data => {
                         createButtons(data);
                     });
+
                 
                 
                 function createButtons(data) {
-                    /* data should look something like this: 
-                    {"0":
-                        {"user_id":1,
-                        "restaurant_name":"first",
-                        "time":1683289909000,
-                        "rating_aspect_1":null,
-                        "rating_aspect_2":null,
-                         ...
-                        }
-                    }
-                    
-                    should look something like this?
-                    {"products": [
-                        { "Name": "Cheese", "Price": 2.5, "Location": "Refrigerated foods" },
-                        { "Name": "Crisps", "Price": 3, "Location": "the Snack isle" },
-                        { "Name": "Pizza", "Price": 4, "Location": "Refrigerated foods" },
-                        { "Name": "Chocolate", "Price": 1.5, "Location": "the Snack isle" },
-                        { "Name": "Self-raising flour", "Price": 1.5, "Location": "Home baking" },
-                        { "Name": "Ground almonds", "Price": 3, "Location": "Home baking" }]
-                    }*/
-                    // change json format
-                    // https://github.com/mdn/dom-examples/blob/main/fetch/fetch-json
-                    var test = document.createElement("p");
-                    test.innerHTML = data;
-                    var container = document.getElementById('container');
-                    container.append(test);
-                    for (let i=0; i<5; i++) {
+                    var container = document.getElementById('container');       
+                    testJSON = JSON.parse(data)
+                    console.log(testJSON)
+
+                    for (let i=0; i<3; i++) {
                         var button = document.createElement('img');
                         button.setAttribute("src", "/static/img/card_find_restaurant.svg");
-                        //button.type = 'button';
-                        //button.innerHTML = 'Press me';
-                        //button.className = 'btn-styled';
+                        button.onclick = function() {
+                            window.location.href='/restaurant/' + testJSON[i].restaurant_name
+                        };
                         var text = document.createElement("p");
                         text.className = "find-restaurant-name";
-                        //text.innerHTML = data[String(i)]["restaurant-name"];
-                        text.innerHTML = data;
-                        //text.innerHTML = data.key.restaurant_name;
+                        text.innerHTML = testJSON[i].restaurant_name;
                         var image = document.createElement("img");
                         image.setAttribute("src", "/static/img/NYUSHdiningLogo.svg");
                         image.className = "find-card-placeholder";
-                        var container = document.getElementById('container');
                         container.appendChild(button);
                         container.appendChild(text);
                         container.appendChild(image);
                     }
-                    //}, false);
                 }
                 
             </script>

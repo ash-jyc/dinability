@@ -491,4 +491,5 @@ def restaurant(restaurant_name):
 
     
 if __name__ == '__main__':
-    app.run('127.0.0.1', 5000, debug=True)
+    # app.run('127.0.0.1', 5000, debug=True)
+    socketio.run(app, debug=True)

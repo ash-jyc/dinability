@@ -1,4 +1,3 @@
-import pandas as pd
-import numpy as np
+import datetime
 
-print(np.nanmean((np.nan, 1, np.nan)))
+print(type(datetime.datetime.now()))

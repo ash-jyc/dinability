@@ -1,3 +1,4 @@
+import datetime
 import Models
 import Schemas
 from Models import app, db
@@ -7,6 +8,7 @@ from RecommendationStrategy import Pearson, Jaccard, Cosine
 from flask_restful import Resource, Api
 from flask import jsonify, abort, request, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask_socketio import SocketIO, join_room, leave_room, emit, send
 from sqlalchemy import exc, select
 import pandas as pd
 import numpy as np
@@ -16,6 +18,15 @@ api = Api(app)
 loginmanager = LoginManager()
 loginmanager.init_app(app)
 loginmanager.login_view = 'login'
+
+socketio = SocketIO(app, cors_allowed_origins="*")
+chat_id = 0
+users_online = []
+users_message = {}
+users_addition = {} 
+#store additional information about each user that needs to be sent to other users when a user logs in, sends a message, or leaves the chat.
+chat_groups = {"Lobby": []}
+number_of_users = 0
 
 @loginmanager.user_loader
 def load_user(user_id):
@@ -125,9 +136,105 @@ class Recommendation_Resource(Resource):
         result = result.to_json(orient="index")
         return result
 
-
 api.add_resource(User_Resource, '/user')
 api.add_resource(Recommendation_Resource, '/recommendation')
+
+# when user logs in; send the total number of users in the server and the groups in the database
+@socketio.on('connect')
+def user_connect():
+    global number_of_users
+    number_of_users+=1
+    groups_query = Models.Group.query.all()
+    groups = []
+    for group in groups_query:
+        groups.append({'group_id': group.group_id, 'group_name': group.group_name})
+    send({'total_users': number_of_users, 'groups': groups}, broadcast=True)
+
+# user logs out/ close the page/ refresh the page; update the current number of users
+@socketio.on('disconnect')
+def user_disconnect():
+    global number_of_users
+    number_of_users-=1
+    emit('disconnect',str(number_of_users), broadcast=True)
+
+# user creates a group, save the group name in db; update the available groups
+@socketio.on('create')
+def create_group(group_name):
+    
+    group =  Models.Group.query.filter_by(group_name=group_name).first_or_404()
+    db.session.add(group)
+    db.session.commit()
+    groups_query = Models.Group.query.all()
+    groups = []
+    for group in groups_query:
+        groups.append({'group_id': group.group_id, 'group_name': group.group_name})
+    send({'total_users': number_of_users, 'groups': groups}, broadcast=True)
+
+# user joins a group; load and send all the messages based on the group id
+@socketio.on('join_group')
+def on_join(data):
+    username = data['username']
+    group_id = data['group_id']
+    group = Models.Group.query.filter_by(group_id=group_id).first().group_name
+    join_room(group_id)
+    messages_query = Models.Message.query.filter_by(group_id=group_id).all()
+    sender_id = Models.User.query.filter_by(username=username).first().id
+    messages =[]
+    for message in messages_query:
+        messages.append({'sender': message.sender_id, 'message': message.content})
+    emit('load_messages',{'group_name': group,'messages': messages})
+    emit('joined',username + ' has joined the group.', room=group_id)
+    now = datetime.datetime.now()
+    message = Models.Message(content=f'{username} has entered the group',sender_id=sender_id,group_id=group_id,time=now)
+    db.session.add(message)
+    db.session.commit()
+
+# user left the group; save the left message in db
+@socketio.on('leave')
+def on_leave(data):
+    username = data['username']
+    group_id = data['group_id']
+    now = datetime.datetime.now()
+    sender_id = Models.User.query.filter_by(username=username).first().id
+    message = Models.Message(content=f'{username} has left the group',sender_id=sender_id,group_id=group_id,time=now)
+    db.session.add(message)
+    db.session.commit()
+    emit('leave',username + ' has left the group.', room=group_id)
+    leave_room(group_id)
+
+
+# user deletes the group; delete all group messages first before removing the group name in db
+@socketio.on('delete')
+def delete_group(data):
+    username = data['username']
+    group_id = data['group_id']
+    group = Models.Group.query.filter_by(group_id=group_id).first()
+    emit('delete',username + ' has deleted this group.', room=group_id)
+    Models.Message.query.filter_by(group_id=group_id).delete()
+    db.session.commit()
+    Models.Group.query.filter_by(group_id=group_id).delete()
+    db.session.commit()
+    groups_query = Models.Group.query.all()
+    groups = []
+    for group in groups_query:
+        groups.append({'group_id': group.group_id, 'group_name': group.group_name})
+    send({'total_users': number_of_users, 'groups': groups}, broadcast=True)
+
+# all messages will be saved in db and will be broadcasted to all the users in the group
+@socketio.on('chat')
+def chat_message(data):
+    message = data['message_body']
+    sender = data['sender']
+    sender_id = Models.User.query.filter_by(username=sender).first().id
+    group = data['group']
+    group_id = data['group_id']
+    current_user = data['current_user']
+    now = datetime.datetime.now()
+    message_object = Models.Message(content=message,sender_id=sender_id,group_id=group_id,time=now)
+    db.session.add(message_object)
+    db.session.commit()
+    emit('chat',{'message':message, 'sender': sender, 'current_user':current_user}, room=group_id)
+
 
 @app.route("/")
 @login_required

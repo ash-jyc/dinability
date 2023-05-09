@@ -161,10 +161,17 @@ def user_disconnect():
 
 # user creates a group, save the group name in db; update the available groups
 @socketio.on('create')
-def create_group(group_name):
+def create_group(data):
     print('create')
-    group =  Models.Group.query.filter_by(group_name=group_name).first_or_404()
+    group_name = data['group_name']
+    owner_id = data['owner_id']
+    restaurant_name = data['restaurant_name']
+    group =  Models.Group(group_name=group_name, owner_id=owner_id, restaurant_name=restaurant_name)
+    group_id = Models.Group.query.filter_by(owner_id=owner_id).first().group_id
+    now = datetime.datetime.now()
+    participate = Models.User_Participate_in_Group(user_id=owner_id, group_id=group_id, time=now)
     db.session.add(group)
+    db.session.add(participate)
     db.session.commit()
     groups_query = Models.Group.query.all()
     groups = []

@@ -46,9 +46,3 @@ This class defines the endpoints for user-related operations (`GET`, `POST`, `PU
 - `put(self)`: Handles `PUT` requests to update user information. Validates the request arguments, retrieves the user from the database based on the provided username, updates the user's attributes, and commits the changes to the database.
 
 - `delete(self)`: Handles `DELETE` requests to delete a user. Validates the request arguments, retrieves the user from the database based on the provided username, deletes the user from the database, and commits the changes.
-
-## Recommendation_Resource Class
-
-This class defines the endpoint for the recommendation operation (`POST`).
-
-- `post(self)`: Handles `POST` requests to generate restaurant recommendations for a user. Retrieves

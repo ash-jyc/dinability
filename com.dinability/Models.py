@@ -58,7 +58,7 @@ class Group(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     payment_method = db.Column(db.String(50), nullable=False)
     time_limit = db.Column(db.Integer, nullable=False)
-    restaurant_name = db.Column(db.String(50), nullable=False)
+    restaurant_name = db.Column(db.String(50), db.ForeignKey('restaurant.restaurant_name'), nullable=False)
     group_name = db.Column(db.String(50), unique=True)
     def __repr__(self):
         return '<Group %r>' % str(self.group_id)
@@ -135,10 +135,10 @@ class Message(db.Model):
     __tablename__ = 'message'
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, primary_key=True)
     group_id = db.Column(db.Integer, db.ForeignKey('group.group_id'), nullable=False, primary_key=True)
-    time = db.Column(db.DateTime, nullable=False)
+    time = db.Column(db.DateTime, nullable=False, primary_key=True)
     content = db.Column(db.String(50))
     def __repr__(self):
-        return '<Message %r %r %r>' % (str(self.sender_id), str(self.sendee_id), str(self.group_id))
+        return '<Message %r %r %r>' % (str(self.sender_id), str(self.group_id), str(self.time))
 
 
 if __name__ == '__main__':

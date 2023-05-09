@@ -142,6 +142,7 @@ api.add_resource(Recommendation_Resource, '/recommendation')
 # when user logs in; send the total number of users in the server and the groups in the database
 @socketio.on('connect')
 def user_connect():
+    print('connect')
     global number_of_users
     number_of_users+=1
     groups_query = Models.Group.query.all()
@@ -153,6 +154,7 @@ def user_connect():
 # user logs out/ close the page/ refresh the page; update the current number of users
 @socketio.on('disconnect')
 def user_disconnect():
+    print('disconnect')
     global number_of_users
     number_of_users-=1
     emit('disconnect',str(number_of_users), broadcast=True)
@@ -160,7 +162,7 @@ def user_disconnect():
 # user creates a group, save the group name in db; update the available groups
 @socketio.on('create')
 def create_group(group_name):
-    
+    print('create')
     group =  Models.Group.query.filter_by(group_name=group_name).first_or_404()
     db.session.add(group)
     db.session.commit()
@@ -173,6 +175,7 @@ def create_group(group_name):
 # user joins a group; load and send all the messages based on the group id
 @socketio.on('join_group')
 def on_join(data):
+    print('join_group')
     username = data['username']
     group_id = data['group_id']
     group = Models.Group.query.filter_by(group_id=group_id).first().group_name
@@ -192,6 +195,7 @@ def on_join(data):
 # user left the group; save the left message in db
 @socketio.on('leave')
 def on_leave(data):
+    print('leave')
     username = data['username']
     group_id = data['group_id']
     now = datetime.datetime.now()
@@ -206,6 +210,7 @@ def on_leave(data):
 # user deletes the group; delete all group messages first before removing the group name in db
 @socketio.on('delete')
 def delete_group(data):
+    print('delete')
     username = data['username']
     group_id = data['group_id']
     group = Models.Group.query.filter_by(group_id=group_id).first()
@@ -223,17 +228,16 @@ def delete_group(data):
 # all messages will be saved in db and will be broadcasted to all the users in the group
 @socketio.on('chat')
 def chat_message(data):
+    print('chat')
     message = data['message_body']
     sender = data['sender']
     sender_id = Models.User.query.filter_by(username=sender).first().id
-    group = data['group']
     group_id = data['group_id']
-    current_user = data['current_user']
     now = datetime.datetime.now()
     message_object = Models.Message(content=message,sender_id=sender_id,group_id=group_id,time=now)
     db.session.add(message_object)
     db.session.commit()
-    emit('chat',{'message':message, 'sender': sender, 'current_user':current_user}, room=group_id)
+    emit('chat',{'message':message, 'sender': sender, 'current_time':now}, room=group_id)
 
 
 @app.route("/")

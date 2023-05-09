@@ -372,7 +372,7 @@ outline: none;
 .find-restaurant-group2{
     padding:10px;
     left:50%;
-    bottom:50%;
+    bottom:5%;
 }
 
 .fork-page{
@@ -429,19 +429,9 @@ outline: none;
 }
 
 .find-card{
-    position:relative;
-    left:15%;
+    position:absolute;
+    right:0%;
     top:25%;
-}
-
-.find-card-placeholder{
-    position: absolute;
-    fill: #5D69A7 !important;
-    left: 40px;
-    top: 35px;
-    min-width: 50px;
-    max-width: 120px;
-    z-index: 120;
 }
 
 .find-restaurant-name {
@@ -449,9 +439,26 @@ outline: none;
     position: relative;
     top: -150px;
     left: 200px;
-    z-index: 100;
+    z-index: 20;
 }
-
+/*.find-card-placeholder{
+    position: absolute;
+    fill: #5D69A7 !important;
+    left: 40px;
+    top: 35px;
+    min-width: 50px;
+    max-width: 120px;
+    z-index: 120;
+}*/
+.find-card-placeholder {
+    position: relative;
+    fill: #5D69A7 !important;
+    top: -220px;
+    left: 50px;
+    min-width: 50px;
+    max-width: 120px;
+    z-index: 90;
+}
 .find-block {
     position: relative;
     /*float:right;*/

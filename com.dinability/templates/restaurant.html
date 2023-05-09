@@ -38,23 +38,27 @@
         //https://stackoverflow.com/questions/13373834/upload-image-using-javascript
     </script>
 
+    <div id="chat_box"></div>
+    <input type="text" id="username" placeholder="username">
+    <input type="text" id="message" placeholder="message">
+    <button id="send">Send</button>
     <!--chat-->
     <script type="text/javascript">
         //TEST CODE
-        /*$(document).ready(function() {
-            var socket = io.connect("http://localhost:5000");
-            socket.on('connect', function() {
-                socket.send("User connected");
-            });
-            socket.on('message', function(data) {
-                $('#messages').append($('<p>')).text(data)
-            });
-            $('sendBtn').on('click', function() {
-                socket.send($('username').val() + ': ' +  ($('#message').val()));
-                $('#message').val('');
-            });
+        // $(document).ready(function() {
+        //     var socket = io.connect("http://localhost:5000");
+        //     socket.on('connect', function() {
+        //         socket.send("User connected");
+        //     });
+        //     socket.on('message', function(data) {
+        //         $('#messages').append($('<p>')).text(data)
+        //     });
+        //     $('sendBtn').on('click', function() {
+        //         socket.send($('username').val() + ': ' +  ($('#message').val()));
+        //         $('#message').val('');
+        //     });
 
-        });*/
+        // });
 
         var socket = io();
         const messages_container = document.getElementById('chat_box');

@@ -39,12 +39,13 @@
     </script>
 
     <div id="chat_box"></div>
+    <div id="messages"></div>
     <input type="text" id="current_user" placeholder="username">
     <input type="text" id="send_message" placeholder="message">
-    <input type="text" id="selected_group_name" placeholder="group">
-    <input type="text" id="current_user_id" placeholder="id">
+    <input type="text" id="current_group_id" placeholder="group">
     <button type="button" name="send" id="send">Send</button>
-    
+    <button type="button" name="join_group" onclick="join_group()">Join group</button>
+
     <!--chat-->
     <script type="text/javascript">
         //TEST CODE
@@ -181,7 +182,7 @@
             // Sets the current user chat to right while other members on the left
             socket.on('chat', function (message) {
                 let output;
-                if (message['current_user'] == $('#current_user_id').val()) {
+                if (message['sender'] == $('#current_user').val()) {
                     output =
                         '<li>' +
                         '<div class="d-flex justify-content-end mb-3">' +
@@ -218,13 +219,14 @@
             $('#send').click(function () {
                 let message = $('#send_message').val();
                 let sender = $('#current_user').val();
-                let group = $('#selected_group_name').text();
+                //let group = $('#selected_group_name').text();
                 let group_id = $('#current_group_id').val();
-                let user_id = $('#current_user_id').val();
+                //let user_id = $('#current_user_id').val();
                 $('#send_message').val('');
-                if (message && sender && group && group_id && user_id) {
-                    socket.emit('chat', { 'message_body': message, 'sender': sender, 'group': group, 'group_id': group_id, 'current_user': user_id })
+                if (message && sender) { //&& group && group_id && user_id) {
+                    socket.emit('chat', { 'message_body': message, 'sender': sender, 'group_id': group_id})//'group': group, 'group_id': group_id, 'current_user': user_id })
                 }
+
             });
         });
 
@@ -233,9 +235,9 @@
         }
 
         // user joins a group; adds delete and leave button; add ul tag for messages to append
-        function join_group(group_id) {
-            $('#current_group_id').val(group_id);
-            socket.emit('join_group', { 'username': $('#current_user').val(), 'group_id': group_id });
+        function join_group() {
+            socket.emit('join_group', { 'username': $('#current_user').val(), 'group_id': $('#current_group_id').val() });
+            console.log($('#current_group_id'));
             let chatheader =
                 '<div class="border p-2 my-2">' +
                 '<div class="text-center" id="selected_group_name">' +

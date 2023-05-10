@@ -54,10 +54,11 @@
     <script>
         function submit_review() {
             const review = document.getElementById("review_box");
+            console.log(review)
             const myRequest = new Request('/review_on_restaurant', {
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
                 method: 'POST',
-                body: JSON.stringify({"review": review, "restaurant_name": $('#restaurant_name').val()})
+                body: JSON.stringify({"review": String(review), "restaurant_name": $('#restaurant_name').val()})
             })
 
             fetch(myRequest)

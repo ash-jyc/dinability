@@ -17,6 +17,7 @@
     <img src={{restaurant.picture_uri}} />
     <p>{{restaurant.description}}</p>
     <div id="chat_box"></div>
+    </div>
     <input id="upload" type="file" onChange="handleImageUpload()" />
     <img id="display-image" src="" />
 
@@ -38,14 +39,32 @@
         //https://stackoverflow.com/questions/13373834/upload-image-using-javascript
     </script>
 
-    <div id="chat_box"></div>
+    
     <div id="messages"></div>
-    <input type="text" id="current_user" placeholder="username">
-    <input type="text" id="send_message" placeholder="message">
-    <input type="text" id="current_group_id" placeholder="group">
-    <button type="button" name="send" id="send">Send</button>
-    <button type="button" name="join_group" onclick="join_group()">Join group</button>
+    <input type="text" id="review_box" placeholder="Write a review...">
+    <button type="submit" class="btn-cancel" id="submit_review" onclick="submit_review()">Submit</button>
+    <div id="chat_box">
+        <input type="text" id="current_user" placeholder="username">
+        <input type="text" id="send_message" placeholder="message">
+        <input type="text" id="current_group_id" placeholder="group">
+        <button type="button" name="send" id="send">Send</button>
+        <button type="button" name="join_group" onclick="join_group()">Join group</button>
+    </div>
+    
+    <script>
+        function submit_review() {
+            const review = document.getElementById("review_box");
+            const myRequest = new Request('/review_on_restaurant', {
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                method: 'POST',
+                body: JSON.stringify({"review": review, "restaurant_name": $('#restaurant_name').val()})
+            })
 
+            fetch(myRequest)
+                .then(response => response.json())
+                .then(console.log(response));
+        }
+    </script>
     <!--chat-->
     <script type="text/javascript">
         //TEST CODE
@@ -72,7 +91,7 @@
             // if user fails to connect, users will still be seeing please refresh the page message.
             socket.on('connect', function () {
                 let output =
-                    '<div class="text-center mt-2">' +
+                    '<div class="text-center">' +
                     '<p>No group selected.</p >' +
                     '</div>';
                 $('#chat_box').html(output);
@@ -88,7 +107,7 @@
                     for (let i = 0; i < data['groups'].length; i++) {
                         output +=
                             '<div class="card my-2">' +
-                            '<div class="card-body clearfix"> ' +
+                            '<div class="card-body"> ' +
                             '<div class="float-left">' + data['groups'][i]['group_name'] + '</div>' +
                             '<div class="float-right">' +
                             '<button type="button" class="btn btn-primary" onclick=join_group(' + data['groups'][i]['group_id'] + ') data-dismiss="modal">Join group</button>' +
@@ -107,8 +126,8 @@
             socket.on('disconnect', function (message) {
                 $('#total_users').text('Total number of users in the server: ' + message);
                 let logout_message = '<li>' +
-                    '<div class="d-flex justify-content-center mb-3">' +
-                    '<div class="w-75 border border-dark rounded-lg p-2">Someone in this group disconnects.</div>' +
+                    '<div class="msg-box">' +
+                    '<div class="msg-box2">Someone in this group disconnects.</div>' +
                     '</div>' +
                     '</li>';
                 $('#messages').append(logout_message);
@@ -121,8 +140,8 @@
                 for (let i = 0; i < message['messages'].length; i++) {
                     saved_messages +=
                         '<li>' +
-                        '<div class="d-flex justify-content-start mb-3">' +
-                        '<div class="w-75 border border-danger rounded-lg p-2">' +
+                        '<div class="msg-box">' +
+                        '<div class="msg-box2">' +
                         '<strong>' + message['messages'][i]['sender'] + '</strong><br>' +
                         message['messages'][i]['message'] +
                         '</div>' +
@@ -137,8 +156,8 @@
             socket.on('joined', function (message) {
                 let join_message =
                     '<li>' +
-                    '<div class="d-flex justify-content-center mb-3">' +
-                    '<div class="w-75 border border-success rounded-lg p-2">' + message + '</div>' +
+                    '<div class="msg-box">' +
+                    '<div class="msg-box2">' + message + '</div>' +
                     '</div>' +
                     '</li>';
                 $('#messages').append(join_message);
@@ -148,8 +167,8 @@
             socket.on('leave', function (message) {
                 let output =
                     '<li>' +
-                    '<div class="d-flex justify-content-center mb-3">' +
-                    '<div class="w-75 border border-dark rounded-lg p-2">' + message + '</div>' +
+                    '<div class="msg-box">' +
+                    '<div class="msg-box2">' + message + '</div>' +
                     '</div>' +
                     '</li>';
                 $('#messages').append(output);
@@ -159,8 +178,8 @@
             socket.on('logout', function (message) {
                 let output =
                     '<li>' +
-                    '<div class="d-flex justify-content-center mb-3">' +
-                    '<div class="w-75 border border-dark rounded-lg p-2">' + message + '</div>' +
+                    '<div class="msg-box">' +
+                    '<div class="msg-box2">' + message + '</div>' +
                     '</div>' +
                     '</li>';
                 $('#messages').append(output);
@@ -170,8 +189,8 @@
             socket.on('delete', function (message) {
                 let output =
                     '<li>' +
-                    '<div class="d-flex justify-content-center mb-3">' +
-                    '<div class="w-75 border border-danger rounded-lg p-2">' +
+                    '<div class="msg-box">' +
+                    '<div class="msg-box2">' +
                     message +
                     '</div>' +
                     '</div>' +
@@ -185,8 +204,8 @@
                 if (message['sender'] == $('#current_user').val()) {
                     output =
                         '<li>' +
-                        '<div class="d-flex justify-content-end mb-3">' +
-                        '<div class="w-75 border border-primary rounded-lg p-2">' +
+                        '<div class="msg-box">' +
+                        '<div class="msg-box2 msg-box2-primary">' +
                         '<strong>You</strong><br>' +
                         message['message'] +
                         '</div>' +
@@ -195,8 +214,8 @@
                 } else {
                     output =
                         '<li>' +
-                        '<div class="d-flex justify-content-start mb-3">' +
-                        '<div class="w-75 border border-danger rounded-lg p-2">' +
+                        '<div class="msg-box">' +
+                        '<div class="msg-box2 msg-box2-danger">' +
                         '<strong>' + message['sender'] + '</strong><br>' +
                         message['message'] +
                         '</div>' +

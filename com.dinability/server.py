@@ -188,12 +188,10 @@ def on_join(data):
     group = Models.Group.query.filter_by(group_id=group_id).first().group_name
     join_room(group_id)
     messages_query = Models.Message.query.filter_by(group_id=group_id).all()
-    print("messages query", messages_query, '\n')
     sender_id = Models.User.query.filter_by(username=username).first().id
     messages =[]
     for message in messages_query:
         messages.append({'sender': message.sender_id, 'message': message.content, 'time': str(message.time)})
-    print(messages)
     emit('load_messages',{'group_name': group,'messages': messages})
     emit('joined',username + ' has joined the group.', room=group_id)
     now = datetime.datetime.now()

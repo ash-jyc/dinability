@@ -681,6 +681,7 @@ input[type=submit]:hover {
 
 .msg-box2-danger {
     border-color: #dc3545 !important;
+    background: #df6d6dcc;
 }
 
 ul.no-bullets {

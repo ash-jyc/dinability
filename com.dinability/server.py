@@ -188,10 +188,12 @@ def on_join(data):
     group = Models.Group.query.filter_by(group_id=group_id).first().group_name
     join_room(group_id)
     messages_query = Models.Message.query.filter_by(group_id=group_id).all()
+    print("messages query", messages_query, '\n')
     sender_id = Models.User.query.filter_by(username=username).first().id
     messages =[]
     for message in messages_query:
-        messages.append({'sender': message.sender_id, 'message': message.content})
+        messages.append({'sender': message.sender_id, 'message': message.content, 'time': str(message.time)})
+    print(messages)
     emit('load_messages',{'group_name': group,'messages': messages})
     emit('joined',username + ' has joined the group.', room=group_id)
     now = datetime.datetime.now()
@@ -241,10 +243,11 @@ def chat_message(data):
     sender_id = Models.User.query.filter_by(username=sender).first().id
     group_id = data['group_id']
     now = datetime.datetime.now()
-    message_object = Models.Message(content=message,sender_id=sender_id,group_id=group_id,time=now)
+    message_object = Models.Message(content=message,sender_id=sender_id, time=now,group_id=group_id)
+    # print(message, sender, type(str(now)))
     db.session.add(message_object)
     db.session.commit()
-    emit('chat',{'message':message, 'sender': sender, 'current_time':now}, room=group_id)
+    emit('chat',{'message':message, 'sender': sender, 'current_time':str(now)}, room=group_id)
 
 
 @app.route("/")

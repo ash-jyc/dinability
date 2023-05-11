@@ -39,16 +39,19 @@
         //https://stackoverflow.com/questions/13373834/upload-image-using-javascript
     </script>
 
-    
+    <div id="total_users"></div>
+    <div id="groups"></div>
     <div id="messages"></div>
-    <input type="text" id="review_box" placeholder="Write a review...">
-    <button type="submit" class="btn-cancel" id="submit_review" onclick="submit_review()">Submit</button>
+    <div class="container">
+        <input type="text" id="review_box" placeholder="Write a review...">
+        <button type="submit" class="btn-cancel" id="submit_review" onclick="submit_review()">Submit</button>
+    </div>
+
     <div id="chat_box">
         <input type="text" id="current_user" placeholder="username">
         <input type="text" id="send_message" placeholder="message">
         <input type="text" id="current_group_id" placeholder="group">
         <button type="button" name="send" id="send">Send</button>
-        <button type="button" name="join_group" onclick="join_group()">Join group</button>
     </div>
     
     <script>
@@ -144,7 +147,7 @@
                         '<div class="msg-box">' +
                         '<div class="msg-box2">' +
                         '<strong>' + message['messages'][i]['sender'] + '</strong><br>' +
-                        message['messages'][i]['message'] +
+                        message['messages'][i]['message'] + '<br>' + message['messages'][i]['time'] + 
                         '</div>' +
                         '</div>' +
                         '</li>';
@@ -208,7 +211,7 @@
                         '<div class="msg-box">' +
                         '<div class="msg-box2 msg-box2-primary">' +
                         '<strong>You</strong><br>' +
-                        message['message'] +
+                        message['message'] + '<br>' + message['current_time'] + 
                         '</div>' +
                         '</div>' +
                         '</li>';
@@ -218,7 +221,7 @@
                         '<div class="msg-box">' +
                         '<div class="msg-box2 msg-box2-danger">' +
                         '<strong>' + message['sender'] + '</strong><br>' +
-                        message['message'] +
+                        message['message'] + message['current_time'] + 
                         '</div>' +
                         '</div>' +
                         '</li>';

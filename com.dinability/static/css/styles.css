@@ -670,6 +670,9 @@ input[type=submit]:hover {
     padding: 0.5rem !important;
     background: #b54eff86;
 }
+.msg-box3 {
+    font-size: 12px;
+}
 
 .msg-box2-primary {
     border-color: #007bff !important;

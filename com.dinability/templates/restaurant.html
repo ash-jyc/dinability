@@ -39,7 +39,11 @@
         //https://stackoverflow.com/questions/13373834/upload-image-using-javascript
     </script>
 
-    <div id="total_users"></div>
+    <!-- <div class='container'>
+        <input type="text" id="group_name" placeholder="group name">
+        <button type="submit" class="btn-primary" id="create">Create group</button>
+    </div>
+    <div id="total_users"></div> -->
     <div id="groups"></div>
     <div id="messages"></div>
     <div class="container">
@@ -234,9 +238,9 @@
             });
 
             $('#create').click(function () {
-                let group_name = $('#group_name').val();
-                $('#group_name').val('');
-                socket.emit('create', group_name);
+                //let group_name = ;
+                //$('#group_name').val('');
+                socket.emit('create', {'group_name': $('#group_name').val(), 'username': $('#current_user').val(), 'restaurant_name': 'first'});
             });
 
             $('#send').click(function () {

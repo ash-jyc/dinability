@@ -164,7 +164,8 @@ def user_disconnect():
 def create_group(data):
     print('create')
     group_name = data['group_name']
-    owner_id = data['owner_id']
+    username = data['username']
+    owner_id = Models.User.query.filter_by(username=username).first().id
     restaurant_name = data['restaurant_name']
     group =  Models.Group(group_name=group_name, owner_id=owner_id, restaurant_name=restaurant_name)
     group_id = Models.Group.query.filter_by(owner_id=owner_id).first().group_id
